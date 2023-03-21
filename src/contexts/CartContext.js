@@ -5,8 +5,8 @@ export const CartContext = createContext();
 
 // localstorage get item
 
-let cartData = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
+let cartData = localStorage.getItem("shoe")
+  ? JSON.parse(localStorage.getItem("shoe"))
   : [];
 
 const CartProvider = ({ children }) => {
@@ -27,7 +27,7 @@ const CartProvider = ({ children }) => {
 
   // localstorage set item
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("shoe", JSON.stringify(cart));
   }, [cart]);
 
   // update item amount

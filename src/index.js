@@ -5,7 +5,7 @@ import App from "./App";
 import "./styles/App.css";
 import "./styles/normalize.css";
 // product provider
-import ProductProvider from "./contexts/ProductContext";
+// import ProductProvider from "./contexts/ProductContext";
 // sidebar provider
 import SidebarProvider from "./contexts/SidebarContext";
 // Context provider

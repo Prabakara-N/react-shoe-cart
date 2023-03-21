@@ -3,21 +3,22 @@ import { useParams } from "react-router-dom";
 // cart conetext
 import { CartContext } from "../contexts/CartContext";
 // product context
-import { ProductContext } from "../contexts/ProductContext";
+// import { ProductContext } from "../contexts/ProductContext";
 // icon
 import { FaShoppingCart } from "react-icons/fa";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import shoes from "../data/data";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { products } = useContext(ProductContext);
+  // const { products } = useContext(ProductContext);
   const { addToCart } = useContext(CartContext);
 
   // get the single product based on the Id
-  const product = products.find((item) => {
-    return item.id === parseInt(id);
+  const product = shoes.find((shoe) => {
+    return shoe.id === parseInt(id);
   });
 
   // if product is not found

@@ -48,3 +48,43 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: var(--clr-white);
 }
+
+.logo {
+  mix-blend-mode: color-burn;
+}
+
+.alert-section {
+  text-align: center;
+  position: relative;
+}
+
+.alert {
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s linear;
+  color: #03256c;
+  z-index: -99;
+  opacity: 1;
+  position: absolute;
+  top: 3.5rem;
+  opacity: 0;
+}
+
+.alert-cart {
+  padding: 10px 0;
+  border-left: 7px solid #12bb4a;
+  background-color: white;
+  gap: 0.5rem;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: all 0.5s ease-in;
+  position: absolute;
+  top: 6.25rem;
+  opacity: 1;
+  z-index: 99;
+}

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 // import product context
-import { ProductContext } from "../contexts/ProductContext";
+// import { ProductContext } from "../contexts/ProductContext";
 
 // import products
 import Header from "../components/Header";
@@ -10,15 +10,17 @@ import Product from "../components/Product";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 
+import shoes from "../data/data";
+
 const Home = () => {
-  // get products from product context
-  const { products } = useContext(ProductContext);
-  console.log(products);
-  // getting men's & women's clothing category
-  const filteredProducts = products.filter(
-    (product) =>
-      product.category === "men's clothing" ||
-      product.category === "women's clothing"
+  // get products from product data
+
+  // getting the all category
+  const filteredProducts = shoes.filter(
+    (shoe) =>
+      shoe.category === "nike" ||
+      shoe.category === "adidas" ||
+      shoe.category === "puma"
   );
 
   return (
