@@ -4,8 +4,7 @@ import App from "./App";
 // css
 import "./styles/App.css";
 import "./styles/normalize.css";
-// product provider
-// import ProductProvider from "./contexts/ProductContext";
+
 // sidebar provider
 import SidebarProvider from "./contexts/SidebarContext";
 // Context provider
@@ -19,9 +18,7 @@ root.render(
     <AuthContextProvider>
       <CartProvider>
         <SidebarProvider>
-          {/* <ProductProvider> */}
           <App />
-          {/* </ProductProvider> */}
         </SidebarProvider>
       </CartProvider>
     </AuthContextProvider>

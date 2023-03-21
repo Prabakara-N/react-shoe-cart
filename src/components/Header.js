@@ -39,7 +39,7 @@ const Header = () => {
         <div className="container mx-auto px-6 md:px-16 flex justify-between items-center h-full">
           <Link to={"/home"}>
             <img
-              src="https://e7.pngegg.com/pngimages/946/113/png-clipart-graphic-design-logo-swag-text-art.png"
+              src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1679395171/logo_q8a29a.png"
               alt="logo"
               className={`${isActive ? "" : "logo"} w-[80px] h-[50px]`}
             />

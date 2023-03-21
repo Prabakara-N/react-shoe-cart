@@ -1,7 +1,4 @@
-import React, { useContext } from "react";
-
-// import product context
-// import { ProductContext } from "../contexts/ProductContext";
+import React from "react";
 
 // import products
 import Header from "../components/Header";
@@ -14,7 +11,6 @@ import shoes from "../data/data";
 
 const Home = () => {
   // get products from product data
-
   // getting the all category
   const filteredProducts = shoes.filter(
     (shoe) =>

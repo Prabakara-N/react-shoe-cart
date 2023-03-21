@@ -27,7 +27,7 @@ const Hero = () => {
           {/* image */}
           <div className="hidden lg:block">
             <img
-              src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1679052439/burgess-milner-OYYE4g-I5ZQ-unsplash_tasmdb.jpg"
+              src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1679393955/hero-bg_ngro9o.jpg"
               alt="main-bg"
               className="w-[900px] h-[580px] mt-16"
             />
