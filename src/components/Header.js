@@ -33,7 +33,7 @@ const Header = () => {
     <>
       <header
         className={`${
-          isActive ? "bg-white py-5 shadow-md" : "bg-gray-300 py-4"
+          isActive ? "bg-gray-400 py-5 shadow-md" : "bg-gray-700 py-4"
         } fixed w-full z-10 transition-all duration-300 `}
       >
         <div className="container mx-auto px-6 md:px-16 flex justify-between items-center h-full">
@@ -48,7 +48,9 @@ const Header = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="cursor-pointer flex relative max-w-[50px]"
           >
-            <BsBag className="text-2xl" />
+            <BsBag
+              className={`${isActive ? "text-black" : "text-white"} text-2xl`}
+            />
             <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
               {itemAmount}
             </div>
