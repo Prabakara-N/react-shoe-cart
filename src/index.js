@@ -19,9 +19,9 @@ root.render(
     <AuthContextProvider>
       <CartProvider>
         <SidebarProvider>
-          <ProductProvider>
-            <App />
-          </ProductProvider>
+          {/* <ProductProvider> */}
+          <App />
+          {/* </ProductProvider> */}
         </SidebarProvider>
       </CartProvider>
     </AuthContextProvider>
