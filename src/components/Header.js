@@ -41,7 +41,7 @@ const Header = () => {
             <img
               src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1679395171/logo_q8a29a.png"
               alt="logo"
-              className={`${isActive ? "" : "logo"} w-[80px] h-[50px]`}
+              className="w-[80px] h-[50px]"
             />
           </Link>
           <div

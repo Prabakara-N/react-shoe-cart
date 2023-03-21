@@ -88,3 +88,7 @@ body {
   opacity: 1;
   z-index: 99;
 }
+
+.hero-bg {
+  background-image: url("https://res.cloudinary.com/daxmjqsy2/image/upload/v1679394299/bg_nf4aoz.jpg");
+}
