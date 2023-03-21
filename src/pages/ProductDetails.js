@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 // cart conetext
 import { CartContext } from "../contexts/CartContext";
-// product context
-// import { ProductContext } from "../contexts/ProductContext";
 // icon
 import { FaShoppingCart } from "react-icons/fa";
 import Header from "../components/Header";
@@ -13,7 +11,7 @@ import shoes from "../data/data";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  // const { products } = useContext(ProductContext);
+
   const { addToCart } = useContext(CartContext);
 
   // get the single product based on the Id
@@ -35,20 +33,20 @@ const ProductDetails = () => {
   return (
     <>
       <Header />
-      <section className="pt-20 lg:pt-40 pb-12 lg:py-32 h-screen flex bg-slate-300">
+      <section className="pt-20 lg:pt-40 pb-12 lg:py-32 h-screen flex bg-slate-800">
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row items-center">
             {/* image */}
-            <div className="flex flex-1 justify-center items-center mb-6 lg:mb-0 ">
+            <div className="flex flex-1 justify-center items-center mb-6 lg:mb-0 w-[350px]">
               <img
-                className="max-w-[200px] h-[200px] lg:max-w-sm md:h-[350px] p-img"
+                className="max-w-[250px] h-[150px] mt-5 lg:max-w-sm md:h-[200px] md:w-[300px] lg:w-[400px] lg:h-[250px] p-img"
                 src={image}
                 alt={title}
               />
             </div>
             {/* text */}
             <div className="flex-1 text-center lg:text-left">
-              <h2 className="text-[16px] font-medium mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0">
+              <h2 className="text-[16px] font-medium mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold">
                 {title}
               </h2>
               <div>
@@ -57,10 +55,12 @@ const ProductDetails = () => {
                   $ {price}
                 </div>
               </div>
-              <p className="mb-8">{description}</p>
+              <p className="mb-8 text-sm md:text-lg px-3 lg:px-0 text-gray-400 lg:pr-8">
+                {description}
+              </p>
               <div className="text-center justify-center flex lg:justify-start">
                 <button
-                  className="bg-gray-600 py-3 px-8 text-white rounded-md hover:bg-gray-800 transition-all duration-300 flex justify-center items-center gap-2"
+                  className="bg-gray-900 py-3 px-8 text-white rounded-md flex justify-center items-center gap-2"
                   onClick={() => addToCart(product, product.id)}
                 >
                   Add to cart

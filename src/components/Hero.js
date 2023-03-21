@@ -15,8 +15,11 @@ const Hero = () => {
                 <div className="w-10 h-[3px] bg-red-500 mr-3"></div>New Trend
               </div>
               <h1 className="text-[70px] leading-[1.1] font-light mb-4 text-gray-100">
-                GOOD SHOES TAKES <br /> YOU TO <br />
-                <span className="font-semibold">GOOD PLACES </span>
+                GOOD <span className="text-blue-600"> SHOES</span> TAKES <br />{" "}
+                YOU TO <br />
+                <span className="font-semibold">
+                  GOOD <span className="text-red-600"> PLACES</span>{" "}
+                </span>
               </h1>
               <Link
                 to={"/home"}
