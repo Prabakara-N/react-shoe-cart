@@ -19,14 +19,14 @@ const CartItem = ({ item }) => {
       <div className="w-full min-h-[150px] flex  items-center grid-x-4">
         {/* image */}
         <Link to={`/product/${id}`}>
-          <img className="max-w-[80px] mr-3" src={image} alt={title} />{" "}
+          <img className="max-w-[100px] mr-3 -ml-5" src={image} alt={title} />{" "}
         </Link>
 
         <div className="w-full flex  flex-col">
           {/* title & remove icon */}
           <div className="flex justify-between mb-2">
             <Link
-              className="text-sm uppercase font-medium max-w-[240px] text-primary hover:underline"
+              className="text-sm uppercase font-medium max-w-[240px] text-white text-primary hover:underline"
               to={`/product/${id}`}
             >
               {title}
