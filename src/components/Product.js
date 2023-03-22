@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import icons
 import { BsPlus, BsEyeFill } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
+import { HiTag } from "react-icons/hi";
 
 // import cart context
 import { CartContext } from "../contexts/CartContext";
@@ -61,7 +62,12 @@ const Product = ({ product }) => {
           </div>
         </div>
         <div>
-          <p className="text-green-400 font-medium mb-1">{offers}</p>
+          <p className="text-green-400 flex gap-x-1 font-medium mb-1">
+            {offers}{" "}
+            <span>
+              <HiTag />
+            </span>{" "}
+          </p>
           <div className="inline-flex gap-x-1 p-1 rounded-full bg-green-400 text-white">
             <small className="inline">{rating} </small>
 
