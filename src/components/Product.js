@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 // import link
 import { Link } from "react-router-dom";
 // import icons
-import { BsPlus, BsEyeFill } from "react-icons/bs";
+import { BsPlus, BsEyeFill, BsStarFill } from "react-icons/bs";
 
 // import cart context
 import { CartContext } from "../contexts/CartContext";
@@ -11,7 +11,8 @@ const Product = ({ product }) => {
   const { addToCart } = useContext(CartContext);
 
   // destructure product
-  const { id, image, title, category, price } = product;
+  const { id, image, title, category, price, originalPrize, offers, rating } =
+    product;
   return (
     <div className>
       <div className=" h-[200px] mb-4 bg-slate-900 relative overflow-hidden group transition">
@@ -41,14 +42,27 @@ const Product = ({ product }) => {
         </div>
       </div>
       {/* category */}
-      <div>
-        <div className="text-sm capitalize text-gray-500 mb-1">{category}</div>
-        <Link to={`/product/${id}`}>
-          <h2 className="font-semibold mb-1">{title}</h2>
-        </Link>
+      <div className="flex item-center justify-between">
         <div>
-          <p className="font-semibold inline-block bg-slate-800 text-white px-1 py-1 rounded-md">
-            $ {price}
+          <div className="text-sm capitalize text-gray-400 mb-1">
+            {category}
+          </div>
+          <Link to={`/product/${id}`}>
+            <h2 className="font-semibold mb-1 text-slate-300">{title}</h2>
+          </Link>
+          <div>
+            <p className="font-semibold inline-block bg-slate-900 text-white px-1 py-1 rounded-md">
+              $ {price}{" "}
+              <span className="originalPrize text-gray-500">
+                $ {originalPrize}
+              </span>
+            </p>
+          </div>
+        </div>
+        <div>
+          <p>{offers}</p>
+          <p>
+            {rating} <BsStarFill />
           </p>
         </div>
       </div>

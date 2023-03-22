@@ -98,3 +98,10 @@ body {
   background-position: center;
   background-size: cover;
 }
+
+.originalPrize {
+  text-decoration: line-through;
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding-left: 0.3rem;
+}
