@@ -255,7 +255,7 @@ const shoes = [
     id: 20,
     title: "Adidas",
     image:
-      "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679393768/adidas-pink-blue_cbuujh.jpg",
+      "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679453062/adidas-pro_rcdgok.jpg",
     description:
       "Designed for comfortable wear for sports and street style, NIKE FOOTWEAR is always fun to wear. Upgrade in style with a wide range from the world’s leading and much-loved sports brand, NIKE.",
     price: 120,
@@ -289,15 +289,15 @@ const shoes = [
   },
   {
     id: 23,
-    title: "Adidas",
+    title: "Puma",
     image:
-      "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679393768/adidas-pink-blue_cbuujh.jpg",
+      "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679453027/puma-3_hqool2.jpg",
     description:
       "Designed for comfortable wear for sports and street style, NIKE FOOTWEAR is always fun to wear. Upgrade in style with a wide range from the world’s leading and much-loved sports brand, NIKE.",
     price: 1209,
     originalPrize: 149,
     offers: "20%",
-    category: "Adidas",
+    category: "Puma",
   },
 ];
 
