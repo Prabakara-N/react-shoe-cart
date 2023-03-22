@@ -9,7 +9,7 @@ import { CartContext } from "../contexts/CartContext";
 
 const CartItem = ({ item }) => {
   // destructuring item
-  const { id, title, image, price, amount } = item;
+  const { id, title, image, price, amount, originalPrize } = item;
 
   const { removeFromCart, increaseAmount, decreaseAmount } =
     useContext(CartContext);
@@ -19,18 +19,24 @@ const CartItem = ({ item }) => {
       <div className="w-full min-h-[150px] flex  items-center grid-x-4">
         {/* image */}
         <Link to={`/product/${id}`}>
-          <img className="max-w-[100px] mr-3 -ml-5" src={image} alt={title} />{" "}
+          <img
+            className="max-w-[110px] mr-6 lg:-ml-5"
+            src={image}
+            alt={title}
+          />{" "}
         </Link>
 
-        <div className="w-full flex  flex-col">
+        <div className="w-full flex ml-6 lg:ml-0  flex-col">
           {/* title & remove icon */}
           <div className="flex justify-between mb-2">
-            <Link
-              className="text-sm uppercase font-medium max-w-[240px] text-white text-primary hover:underline"
-              to={`/product/${id}`}
-            >
-              {title}
-            </Link>
+            <div>
+              <Link
+                className="text-sm uppercase font-medium max-w-[240px] text-white text-primary hover:underline"
+                to={`/product/${id}`}
+              >
+                {title}
+              </Link>
+            </div>
             {/* remove icon */}
             <div
               className="text-xl cursor-pointer"
@@ -63,8 +69,9 @@ const CartItem = ({ item }) => {
             </div>
             {/* item prize */}
             <div className="flex-1 flex items-center justify-around">
-              <div className="inline-block bg-slate-900 text-white px-1 py-1">
-                $ {price}
+              <div className="inline-flex bg-slate-900 text-white px-1 py-1 ">
+                ${price}{" "}
+                <small className="cartoriginalPrize">${originalPrize}</small>
               </div>
             </div>
             {/* final prize */}

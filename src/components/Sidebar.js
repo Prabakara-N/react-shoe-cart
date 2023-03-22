@@ -25,7 +25,7 @@ const Sidebar = () => {
     <div
       className={`${
         isOpen ? "right-0" : "-right-full"
-      } w-full bg-slate-900 fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-50 px-4 lg:px-[35px]`}
+      } w-full bg-slate-900 fixed top-0 h-full shadow-2xl md:w-[50vw] xl:max-w-[30vw] transition-all duration-300 z-50 px-4 lg:px-[35px]`}
     >
       <div className="flex items-center justify-between py-6 border-b">
         <div className="uppercase text-sm font-semibold text-white">
@@ -53,7 +53,7 @@ const Sidebar = () => {
             $ {parseFloat(total).toFixed(2)}
           </div>
           <div
-            className="cursor-pointer py-2 px-2 rounded-md bg-red-500 text-white flex justify-center items-centerm text-sm"
+            className="cursor-pointer py-2 px-2 rounded-md bg-red-600 text-white flex justify-center items-centerm text-sm"
             onClick={clearCart}
           >
             <p className="flex gap-2 items-center">
