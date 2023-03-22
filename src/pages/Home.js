@@ -12,6 +12,7 @@ import Footer from "../components/Footer";
 const Home = () => {
   const [myShoes, setMyShoes] = useState(shoes);
 
+  // filter
   const filterBrands = (category) => {
     if (category === "All") {
       setMyShoes(shoes);
