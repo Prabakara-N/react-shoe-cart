@@ -24,16 +24,16 @@ const SignUp = () => {
   };
   return (
     <>
-      <div className="container mx-auto">
-        <div className="w-full h-screen  bg-slate-600">
-          <div className="fixed w-full px-4 py-16 z-50 ">
-            <div className="max-w-[450px] h-[600px] mx-auto bg-black/75 text-white rounded-md">
+      <div>
+        <div className="w-full h-screen  bg-slate-600 in">
+          <div className="fixed w-full px-4 py-14 z-50 ">
+            <div className="max-w-[450px] h-[600px] mx-auto bg-black/80 text-white rounded-md shadow-xl">
               <div className="max-w-[320px] mx-auto py-16 px-2 md:px-0">
                 <div className="logo-login text-center ">
                   <img
-                    src="https://e7.pngegg.com/pngimages/946/113/png-clipart-graphic-design-logo-swag-text-art.png"
+                    src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1679395171/logo_q8a29a.png"
                     alt="logo"
-                    className="w-[70px] h-[40px] mx-auto rounded-xl"
+                    className="w-[90px] h-[50px] mx-auto rounded-xl"
                   />
                 </div>
                 <h1 className="text-3xl font-bold">Sign Up</h1>

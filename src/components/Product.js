@@ -48,7 +48,7 @@ const Product = ({ product }) => {
         </Link>
         <div>
           <p className="font-semibold inline-block bg-slate-800 text-white px-1 py-1 rounded-md">
-            {price}
+            $ {price}
           </p>
         </div>
       </div>

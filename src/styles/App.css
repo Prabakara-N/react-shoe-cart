@@ -92,3 +92,9 @@ body {
 .hero-bg {
   background-image: url("https://res.cloudinary.com/daxmjqsy2/image/upload/v1679394299/bg_nf4aoz.jpg");
 }
+
+.in {
+  background-image: url("https://res.cloudinary.com/daxmjqsy2/image/upload/v1679394299/bg_nf4aoz.jpg");
+  background-position: center;
+  background-size: cover;
+}
