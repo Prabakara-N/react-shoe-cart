@@ -42,7 +42,7 @@ const shoes = [
   },
   {
     id: 4,
-    title: "REACT PEGASUS TRAIL 4",
+    title: "REACT PEGASUS 4",
     image:
       "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679394144/nike_k0aizf.jpg",
     description:
@@ -70,7 +70,7 @@ const shoes = [
   },
   {
     id: 6,
-    title: "NK Flex Experience Run 11",
+    title: "NK Flex Run 11",
     image:
       "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679394272/nike_casual_v2wbtl.jpg",
     description:
@@ -79,12 +79,11 @@ const shoes = [
     originalPrize: 144,
     offers: "18% offer",
     rating: 4.4,
-
     category: "Nike",
   },
   {
     id: 7,
-    title: "WalkWagon M Walking Shoe",
+    title: "WalkWagon M",
     image:
       "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679395151/adidas-y-bg_bua2wm.jpg",
     description:
@@ -266,7 +265,7 @@ const shoes = [
     price: 120,
     originalPrize: 139,
     offers: "11% offer",
-    rating: 4.0,
+    rating: 4.1,
     category: "Adidas",
   },
   {

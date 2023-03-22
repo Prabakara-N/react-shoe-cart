@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 // cart conetext
 import { CartContext } from "../contexts/CartContext";
 // icon
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaStar } from "react-icons/fa";
+
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
@@ -29,7 +30,8 @@ const ProductDetails = () => {
   }
 
   // destructure products
-  const { title, price, description, image } = product;
+  const { title, price, description, image, rating, offers, originalPrize } =
+    product;
   return (
     <>
       <Header />
@@ -45,14 +47,36 @@ const ProductDetails = () => {
               />
             </div>
             {/* text */}
+            <h2 className="text-[16px] font-medium mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold lg:hidden">
+              {title}
+            </h2>
             <div className="flex-1 text-center lg:text-left">
-              <h2 className="text-[16px] font-medium mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold">
-                {title}
-              </h2>
-              <div>
-                <div className="text-md md:text-xl font-medium mb-4 bg-slate-900 text-white px-4 py-2 rounded-md d-in inline-block">
-                  {" "}
-                  $ {price}
+              <div className="flex items-center gap-x-3 justify-center lg:justify-start lg:gap-x-10">
+                <div>
+                  <h2 className="text-[16px] font-medium mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold hidden lg:block">
+                    {title}
+                  </h2>
+                  <div>
+                    <div className="text-md md:text-xl font-medium mb-4 bg-slate-900 text-white px-4 py-2 rounded-md d-in inline-block">
+                      {" "}
+                      $ {price}{" "}
+                      <span className="originalPrize text-gray-500">
+                        $ {originalPrize}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-x-2 lg:flex-col">
+                  <p className="text-green-400 font-medium mb-1">{offers}</p>
+                  <div className="inline-flex items-center gap-x-1 p-1 rounded-full bg-green-400 text-white">
+                    <small className="inline lg:text-md">{rating} </small>
+
+                    <small className="inline lg:text-lg">
+                      {" "}
+                      <FaStar className="text-sm pb-1" />{" "}
+                    </small>
+                  </div>
                 </div>
               </div>
               <p className="mb-8 text-sm md:text-lg px-3 lg:px-0 text-gray-400 lg:pr-8">

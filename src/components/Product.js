@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 // import link
 import { Link } from "react-router-dom";
 // import icons
-import { BsPlus, BsEyeFill, BsStarFill } from "react-icons/bs";
+import { BsPlus, BsEyeFill } from "react-icons/bs";
+import { FaStar } from "react-icons/fa";
 
 // import cart context
 import { CartContext } from "../contexts/CartContext";
@@ -60,10 +61,15 @@ const Product = ({ product }) => {
           </div>
         </div>
         <div>
-          <p>{offers}</p>
-          <p>
-            {rating} <BsStarFill />
-          </p>
+          <p className="text-green-400 font-medium mb-1">{offers}</p>
+          <div className="inline-flex gap-x-1 p-1 rounded-full bg-green-400 text-white">
+            <small className="inline">{rating} </small>
+
+            <small className="inline text-sm">
+              {" "}
+              <FaStar className="text-sm pb-1" />{" "}
+            </small>
+          </div>
         </div>
       </div>
     </div>
