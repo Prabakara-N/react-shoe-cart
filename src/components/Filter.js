@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { SiNike, SiPuma } from "react-icons/si";
-import { CgAdidas } from "react-icons/cg";
-
-import Product from "./Product";
 
 const Filter = ({ filterBrands, brands }) => {
   const [selected, setSelected] = useState("All");

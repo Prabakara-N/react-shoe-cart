@@ -11,20 +11,10 @@ import { CartContext } from "../contexts/CartContext";
 
 const Product = ({ product }) => {
   const { addToCart } = useContext(CartContext);
-  // const [shoes, setaShoes] = useState(product);
 
   // destructure product
   const { id, image, title, category, price, originalPrize, offers, rating } =
     product;
-
-  // // filter
-  // const filterType = (category) => {
-  //   setaShoes(
-  //     product.filter((item) => {
-  //       return item.category === category;
-  //     })
-  //   );
-  // };
 
   return (
     <>
