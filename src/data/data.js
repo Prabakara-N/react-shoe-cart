@@ -10,7 +10,7 @@ const shoes = [
     originalPrize: 149,
     offers: "12% offer",
     rating: 4.2,
-    category: "nike",
+    category: "Nike",
   },
   {
     id: 2,

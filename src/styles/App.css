@@ -105,3 +105,8 @@ body {
   font-weight: 400;
   padding-left: 0.3rem;
 }
+
+.selected {
+  /* color: red; */
+  background-color: red;
+}
