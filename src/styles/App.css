@@ -105,3 +105,14 @@ body {
   font-weight: 400;
   padding-left: 0.3rem;
 }
+
+.header {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05)
+  );
+  backdrop-filter: blur(21px);
+  -webkit-backdrop-filter: blur(21px);
+  padding: 1rem 0;
+}

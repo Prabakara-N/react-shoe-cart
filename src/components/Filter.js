@@ -10,13 +10,13 @@ const Filter = ({ filterBrands, brands }) => {
 
   return (
     <>
-      <ul className="flex cursor-pointer justify-center items-center lg:text-xl gap-x-4 md:gap-x-6 bg-black text-white py-4">
+      <ul className="flex justify-center items-center lg:text-xl gap-x-4 md:gap-x-6 bg-black text-white py-4">
         {brands.map((category, index) => {
           return (
             <li
               className={`${
                 selected === category ? "bg-slate-800" : null
-              } px-3 py-1 rounded-lg`}
+              } px-3 py-1 rounded-lg cursor-pointer`}
               key={index}
               onClick={() => filterCatogery(category)}
             >

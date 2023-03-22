@@ -33,9 +33,7 @@ const Header = () => {
     <>
       <header
         className={`${
-          isActive
-            ? "bg-[rgba(0,0,0,0.9)] py-5 shadow-md"
-            : "bg-[rgba(0,0,0,0.5)] py-4"
+          isActive ? "header" : "bg-[rgba(0,0,0,0.5)] py-4"
         } fixed w-full z-10 transition-all duration-300 `}
       >
         <div className="container mx-auto px-6 md:px-16 flex justify-between items-center h-full">
