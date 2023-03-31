@@ -19,7 +19,11 @@ const SignIn = () => {
       navigate("/home");
     } catch (error) {
       console.log(error);
-      setError(error.message);
+      if (error.message === "Firebase: Error (auth/user-not-found).") {
+        setError("User Doesn't Exist...Create Your Account");
+      } else if (error.message === "Firebase: Error (auth/wrong-password).") {
+        setError("Password Wrong...Please Check Your Password");
+      }
     }
   };
   return (
@@ -36,7 +40,9 @@ const SignIn = () => {
                 />
               </div>
               <h1 className="text-3xl font-bold">Sign In</h1>
-              {error ? <small className="text-red-500">{error}</small> : null}
+              {error ? (
+                <small className="text-red-500 font-semibold">{error}</small>
+              ) : null}
               <form
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col py-4"

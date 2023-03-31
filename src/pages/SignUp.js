@@ -19,7 +19,9 @@ const SignUp = () => {
       navigate("/home");
     } catch (error) {
       console.log(error);
-      setError(error.message);
+      if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+        setError("User Already Exist...Try with another Email");
+      }
     }
   };
   return (
@@ -37,7 +39,9 @@ const SignUp = () => {
                   />
                 </div>
                 <h1 className="text-3xl font-bold">Sign Up</h1>
-                {error ? <small className="text-red-500">{error}</small> : null}
+                {error ? (
+                  <small className="text-red-500 font-semibold">{error}</small>
+                ) : null}
                 <form
                   onSubmit={handleSubmit}
                   className="w-full flex flex-col py-4"
