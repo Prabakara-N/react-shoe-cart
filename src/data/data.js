@@ -56,7 +56,7 @@ const shoes = [
   },
   {
     id: 5,
-    title: "AIR ZOOM PEGASUS 39",
+    title: "AIR ZOOM PEGASUS",
     image:
       "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679394202/nike-yellow_ejmyvm.jpg",
     description:

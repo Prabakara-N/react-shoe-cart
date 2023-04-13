@@ -79,7 +79,7 @@ const SignUp = () => {
                     <span className="text-gray-500">
                       Already have an account ?
                     </span>
-                    <Link to="/signin"> Sign In</Link>{" "}
+                    <Link to="/"> Sign In</Link>{" "}
                   </p>
                 </form>
                 <SocialMedia />

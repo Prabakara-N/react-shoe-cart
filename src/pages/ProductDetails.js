@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-// cart conetext
+// cart context
 import { CartContext } from "../contexts/CartContext";
 // icon
 import { FaShoppingCart, FaStar } from "react-icons/fa";
@@ -47,13 +47,13 @@ const ProductDetails = () => {
               />
             </div>
             {/* text */}
-            <h2 className="text-[16px] font-medium mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold lg:hidden">
+            <h2 className="text-[16px] mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold lg:hidden">
               {title}
             </h2>
             <div className="flex-1 text-center lg:text-left">
               <div className="flex items-center gap-x-3 justify-center lg:justify-start lg:gap-x-10">
                 <div>
-                  <h2 className="text-[16px] font-medium mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold hidden lg:block">
+                  <h2 className="text-[16px] mb-2 max-w-[450px] md:text-[25px] mx-auto lg:mx-0 text-white font-semibold hidden lg:block">
                     {title}
                   </h2>
                   <div>
