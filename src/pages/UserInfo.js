@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AiFillEdit } from "react-icons/ai";
+import { UserInfoContext } from "../contexts/UserInfoContext";
 
 const UserInfo = () => {
+  const { userName, email, address } = useContext(UserInfoContext);
   return (
     <div className="bg-slate-800 w-full h-full flex flex-col min-h-screen justify-center items-center text-white">
       <div className="bg-slate-900/50 rounded-lg p-6 w-[95%] tablet:w-[450px] flex flex-col gap-y-8">
@@ -17,11 +19,7 @@ const UserInfo = () => {
             Prabakaran
           </h2>
         </div>
-        <p className="bg-black/25 px-3 py-2 rounded-md">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus,
-          debitis velit. Amet tenetur cum non sed eius ipsa sit eos facere ab
-          velit reprehenderit magni, quis dolores placeat repellat fuga?
-        </p>
+
         <div className="flex justify-between items-center">
           <p className="text-center bg-black/25 px-2 py-2 rounded-md inline">
             mspk028@gmail.com
@@ -30,6 +28,11 @@ const UserInfo = () => {
             8072354657
           </p>
         </div>
+        <p className="bg-black/25 px-3 py-2 rounded-md">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus,
+          debitis velit. Amet tenetur cum non sed eius ipsa sit eos facere ab
+          velit reprehenderit magni, quis dolores placeat repellat fuga?
+        </p>
         <div className="">
           <button
             className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg"

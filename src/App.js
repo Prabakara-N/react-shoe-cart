@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import UserInfo from "./pages/UserInfo";
+import AddProfile from "./pages/AddProfile";
 import Error from "./pages/Error";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="home" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/userinfo" element={<UserInfo />} />
+          <Route path="/addprofile" element={<AddProfile />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>
