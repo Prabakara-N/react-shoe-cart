@@ -10,6 +10,7 @@ const UserInfoProvider = ({ children }) => {
   const [number, setNumber] = useState("");
   const [address, setAddress] = useState("");
   const [imageAsset, setImageAsset] = useState(null);
+  const [isDone, setIsDone] = useState(false);
 
   return (
     <UserInfoContext.Provider
@@ -24,6 +25,8 @@ const UserInfoProvider = ({ children }) => {
         setAddress,
         imageAsset,
         setImageAsset,
+        isDone,
+        setIsDone,
       }}
     >
       {children}

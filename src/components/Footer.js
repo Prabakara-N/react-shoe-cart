@@ -13,7 +13,7 @@ const Footer = () => {
       <SocialMedia />
       <div className="text-center mt-10">
         <button className=" px-4 py-2 rounded-lg font-medium bg-gray-800 text-white hover:bg-slate-600 transition duration-300">
-          <Link to="/signin">Log Out</Link>
+          <Link to="/">Log Out</Link>
         </button>
       </div>
     </footer>

@@ -18,22 +18,18 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 
-import {
-  addDoc,
-  collection,
-  getDoc,
-  serverTimestamp,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection, getDoc, doc, updateDoc } from "firebase/firestore";
 
 import { db, firestore, storage } from "../utils/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AddProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { id } = useParams();
   const { user } = UserAuth();
+  console.log(user?.uid);
+
+  const { id } = useParams();
+
   const navigate = useNavigate();
 
   const renderTooltip = (props) => (
@@ -57,6 +53,7 @@ const AddProfile = () => {
     setAddress,
     imageAsset,
     setImageAsset,
+    setIsDone,
   } = useContext(UserInfoContext);
 
   const uploadProfile = (e) => {
@@ -100,24 +97,31 @@ const AddProfile = () => {
   };
 
   // const getUserDetails = async () => {
-  //   const docRef = doc(db, "userInfo", id);
-  //   const snapshot = await getDoc(docRef);
-  //   if (snapshot.exists()) {
-  //     console.log({ ...snapshot.data() });
-  //     // setForm({ ...snapshot.data() });
+  //   try {
+  //     const docRef = doc(db, "userInfo", id);
+  //     const userProfile = await getDoc(docRef);
+  //     if (userProfile.exists()) {
+  //       setUserName(userProfile.data().userName);
+  //       setEmail(userProfile.data().email);
+  //       setNumber(userProfile.data().number);
+  //       setAddress(userProfile.data().address);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
   //   }
   // };
 
+  // useEffect(() => {
+  //   user?.uid && getUserDetails();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [user?.uid]);
+
   const getUserProfile = async () => {
-    const userProfile = await firestore
-      .collection("userInfo")
-      .doc(user.uid)
-      .get();
+    const userProfile = await firestore.collection("userInfo").doc(id).get();
     setUserName(userProfile.data().userName);
     setEmail(userProfile.data().email);
-    setNumber(userProfile.data().email);
-    setAddress(userProfile.data().email);
-    setImageAsset(userProfile.data().imageAsset);
+    setNumber(userProfile.data().number);
+    setAddress(userProfile.data().address);
   };
 
   useEffect(() => {
@@ -135,9 +139,9 @@ const AddProfile = () => {
             email,
             number,
             address,
-            timestamp: serverTimestamp(),
             userId: user.uid,
           });
+          setIsDone(true);
           toast.success("Profile Added Successfully");
         } catch (error) {
           console.log(error);
@@ -149,16 +153,15 @@ const AddProfile = () => {
             email,
             number,
             address,
-            timestamp: serverTimestamp(),
-            author: user.displayName,
             userId: user.uid,
           });
+          setIsDone(true);
           toast.success("Profile Updated Successfully");
         } catch (error) {
           console.log(error);
         }
       }
-      navigate("/userinfo");
+      navigate(`/userinfo/${user.uid}`);
     } else {
       toast.error("All fields are mendatory to fill");
     }
