@@ -9,6 +9,7 @@ const UserInfoProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [address, setAddress] = useState("");
+  const [imageAsset, setImageAsset] = useState(null);
 
   return (
     <UserInfoContext.Provider
@@ -21,6 +22,8 @@ const UserInfoProvider = ({ children }) => {
         setNumber,
         address,
         setAddress,
+        imageAsset,
+        setImageAsset,
       }}
     >
       {children}
