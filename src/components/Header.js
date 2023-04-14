@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import Tooltip from "react-bootstrap/Tooltip";
+import { OverlayTrigger } from "react-bootstrap";
 // link
 import { Link } from "react-router-dom";
 import userLogo from "../assets/images/user.png";
@@ -23,8 +25,23 @@ const Header = () => {
 
   const { isOpen, setIsOpen } = useContext(SidebarContext);
 
-  const { imageAsset } = useContext(UserInfoContext);
   const { user } = UserAuth();
+
+  useEffect(() => {
+    console.log(user?.uid);
+  }, [user]);
+
+  const { imageAsset } = useContext(UserInfoContext);
+
+  const renderTooltip = (props) => (
+    <Tooltip
+      className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      id="button-tooltip"
+      {...props}
+    >
+      Profile
+    </Tooltip>
+  );
 
   // eventlistneres
 
@@ -50,16 +67,22 @@ const Header = () => {
               className="w-[80px] h-[50px]"
             />
           </Link>
-          <div className="flex items-center gap-x-8">
-            <div>
-              <Link to={"/userinfo"}>
-                <img
-                  src={imageAsset}
-                  alt="user-logo"
-                  className="w-[40px] h-[40px] rounded-full"
-                />
-              </Link>
-            </div>
+          <div className="flex items-center gap-x-5 md:gap-x-8">
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 200, hide: 100 }}
+              overlay={renderTooltip}
+            >
+              <div>
+                <Link to={`/userinfo/${user?.uid}`}>
+                  <img
+                    src={`${imageAsset ? imageAsset : userLogo}`}
+                    alt="user-logo"
+                    className="w-[40px] h-[40px] rounded-full"
+                  />
+                </Link>
+              </div>
+            </OverlayTrigger>
             <div
               onClick={() => setIsOpen(!isOpen)}
               className="cursor-pointer flex relative max-w-[50px]"
