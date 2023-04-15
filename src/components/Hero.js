@@ -27,7 +27,7 @@ const Hero = () => {
             >
               Discover More
             </Link>
-            <div className="md:w-[130px] w-[100px] h-[40px] cursor-pointer relative z-50 opacity-100 mt-5">
+            <div className="md:w-[130px] w-[100px] h-[40px] cursor-pointer relative z-10 opacity-100 mt-5">
               <video
                 autoPlay={true}
                 loop={true}

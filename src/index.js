@@ -11,20 +11,16 @@ import SidebarProvider from "./contexts/SidebarContext";
 import CartProvider from "./contexts/CartContext";
 // Auth provider
 import AuthContextProvider from "./contexts/AuthContext";
-// userinfo provider
-import UserInfoProvider from "./contexts/UserInfoContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <UserInfoProvider>
-      <AuthContextProvider>
-        <CartProvider>
-          <SidebarProvider>
-            <App />
-          </SidebarProvider>
-        </CartProvider>
-      </AuthContextProvider>
-    </UserInfoProvider>
+    <AuthContextProvider>
+      <CartProvider>
+        <SidebarProvider>
+          <App />
+        </SidebarProvider>
+      </CartProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );

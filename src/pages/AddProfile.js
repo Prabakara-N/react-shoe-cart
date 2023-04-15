@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserInfoContext } from "../contexts/UserInfoContext";
+
 import { UserAuth } from "../contexts/AuthContext";
 
 import Loader from "../components/Loader";
@@ -18,15 +18,27 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 
-import { addDoc, collection, getDoc, doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 
-import { db, firestore, storage } from "../utils/firebase";
+import { db, storage } from "../utils/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AddProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = UserAuth();
-  console.log(user?.uid);
+  const {
+    user,
+    userName,
+    setUserName,
+    email,
+    setEmail,
+    number,
+    setNumber,
+    address,
+    setAddress,
+    imageAsset,
+    setImageAsset,
+    setIsDone,
+  } = UserAuth();
 
   const { id } = useParams();
 
@@ -41,20 +53,6 @@ const AddProfile = () => {
       remove
     </Tooltip>
   );
-
-  const {
-    userName,
-    setUserName,
-    email,
-    setEmail,
-    number,
-    setNumber,
-    address,
-    setAddress,
-    imageAsset,
-    setImageAsset,
-    setIsDone,
-  } = useContext(UserInfoContext);
 
   const uploadProfile = (e) => {
     setIsLoading(true);
@@ -86,6 +84,10 @@ const AddProfile = () => {
     );
   };
 
+  // useEffect(() => {
+  //    uploadProfile();
+  // }, [imageAsset]);
+
   const deleteImage = () => {
     setIsLoading(true);
     const deleteRef = ref(storage, imageAsset);
@@ -96,49 +98,17 @@ const AddProfile = () => {
     });
   };
 
-  // const getUserDetails = async () => {
-  //   try {
-  //     const docRef = doc(db, "userInfo", id);
-  //     const userProfile = await getDoc(docRef);
-  //     if (userProfile.exists()) {
-  //       setUserName(userProfile.data().userName);
-  //       setEmail(userProfile.data().email);
-  //       setNumber(userProfile.data().number);
-  //       setAddress(userProfile.data().address);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   user?.uid && getUserDetails();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [user?.uid]);
-
-  const getUserProfile = async () => {
-    const userProfile = await firestore.collection("userInfo").doc(id).get();
-    setUserName(userProfile.data().userName);
-    setEmail(userProfile.data().email);
-    setNumber(userProfile.data().number);
-    setAddress(userProfile.data().address);
-  };
-
-  useEffect(() => {
-    id && getUserProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
-
   const saveDetails = async (e) => {
     e.preventDefault();
     if (userName && email && number && address) {
       if (!id) {
         try {
           await addDoc(collection(db, "userInfo"), {
-            userName,
-            email,
-            number,
-            address,
+            imageURL: imageAsset,
+            userName: userName,
+            email: email,
+            number: number,
+            address: address,
             userId: user.uid,
           });
           setIsDone(true);
@@ -149,10 +119,11 @@ const AddProfile = () => {
       } else {
         try {
           await updateDoc(doc(db, "userInfo", id), {
-            userName,
-            email,
-            number,
-            address,
+            imageURL: imageAsset,
+            userName: userName,
+            email: email,
+            number: number,
+            address: address,
             userId: user.uid,
           });
           setIsDone(true);

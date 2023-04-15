@@ -16,8 +16,8 @@ import { BsBag } from "react-icons/bs";
 
 // alert
 import Alert from "./Alert";
-import { UserInfoContext } from "../contexts/UserInfoContext";
 import { UserAuth } from "../contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 const Header = () => {
   // header state
@@ -25,13 +25,7 @@ const Header = () => {
 
   const { isOpen, setIsOpen } = useContext(SidebarContext);
 
-  const { user } = UserAuth();
-
-  useEffect(() => {
-    console.log(user?.uid);
-  }, [user]);
-
-  const { imageAsset } = useContext(UserInfoContext);
+  const { user, imageAsset } = UserAuth();
 
   const renderTooltip = (props) => (
     <Tooltip
@@ -57,8 +51,10 @@ const Header = () => {
       <header
         className={`${
           isActive ? "header" : "bg-[rgba(0,0,0,0.5)] py-4"
-        } fixed w-full z-10 transition-all duration-300 `}
+        } fixed w-full z-50 transition-all duration-300 `}
       >
+        <ToastContainer position="top-right" />
+
         <div className="container mx-auto px-6 md:px-16 flex justify-between items-center h-full">
           <Link to={"/home"}>
             <img
