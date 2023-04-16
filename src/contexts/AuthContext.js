@@ -20,7 +20,7 @@ const AuthContextProvider = ({ children }) => {
   const [isDone, setIsDone] = useState(false);
 
   const clearUserData = () => {
-    setImageAsset("");
+    setImageAsset(null);
     setUserName("");
     setEmail("");
     setNumber("");
@@ -59,15 +59,20 @@ const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        signUp,
         user,
+        signUp,
         logIn,
         logOut,
         userName,
+        setUserName,
         email,
+        setEmail,
         number,
+        setNumber,
         address,
+        setAddress,
         imageAsset,
+        setImageAsset,
         isDone,
         setIsDone,
       }}

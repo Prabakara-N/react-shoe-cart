@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { UserAuth } from "../contexts/AuthContext";
 
@@ -25,6 +25,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const AddProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     user,
     userName,
@@ -84,10 +85,6 @@ const AddProfile = () => {
     );
   };
 
-  // useEffect(() => {
-  //    uploadProfile();
-  // }, [imageAsset]);
-
   const deleteImage = () => {
     setIsLoading(true);
     const deleteRef = ref(storage, imageAsset);
@@ -104,7 +101,6 @@ const AddProfile = () => {
       if (!id) {
         try {
           await addDoc(collection(db, "userInfo"), {
-            imageURL: imageAsset,
             userName: userName,
             email: email,
             number: number,
@@ -119,7 +115,6 @@ const AddProfile = () => {
       } else {
         try {
           await updateDoc(doc(db, "userInfo", id), {
-            imageURL: imageAsset,
             userName: userName,
             email: email,
             number: number,
