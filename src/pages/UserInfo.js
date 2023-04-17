@@ -7,56 +7,8 @@ import Header from "../components/Header";
 import { UserAuth } from "../contexts/AuthContext";
 
 const UserInfo = ({ fetchUserDetails }) => {
-  const {
-    user,
-    userName,
-    email,
-    number,
-    address,
-    imageAsset,
-    isDone,
-    // setImageAsset,
-    // setIsDone,
-    // setUserName,
-    // setEmail,
-    // setNumber,
-    // setAddress,
-    // setDocId,
-    setIsEditing,
-    docId,
-  } = UserAuth();
-
-  // useEffect(() => {
-  //   const fetchUserDetails = async () => {
-  //     if (user && user?.uid) {
-  //       const q = query(
-  //         collection(db, "userInfo"),
-  //         where("userId", "==", user?.uid)
-  //       );
-  //       const querySnapshot = await getDocs(q);
-
-  //       querySnapshot.docs.map((doc) => {
-  //         setDocId(doc.id);
-  //         const userData = doc.data();
-  //         console.log(userData);
-  //         if (userData) {
-  //           setUserName(userData.userName);
-  //           setImageAsset(userData.image);
-  //           setEmail(userData.email);
-  //           setNumber(userData.number);
-  //           setAddress(userData.address);
-  //           setIsDone(true);
-  //         } else {
-  //           setIsDone(false);
-  //         }
-
-  //         return doc.id;
-  //       });
-  //     }
-  //   };
-  //   fetchUserDetails();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [user?.uid, user]);
+  const { user, userName, email, number, address, imageAsset, isDone, docId } =
+    UserAuth();
 
   useEffect(() => {
     fetchUserDetails();
@@ -68,7 +20,7 @@ const UserInfo = ({ fetchUserDetails }) => {
       <Header />
       <div className="bg-slate-800 w-full h-full flex flex-col min-h-screen justify-center items-center text-white">
         <div className="bg-slate-900/50 rounded-lg p-6 w-[95%] sm:w-[450px] flex flex-col gap-y-8 mt-16">
-          {user && user?.uid && isDone ? (
+          {isDone ? (
             <>
               <div className="-mt-16">
                 <img
@@ -83,7 +35,7 @@ const UserInfo = ({ fetchUserDetails }) => {
                   {userName}
                 </h2>
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-y-5 sm:flex-row sm:justify-between lg:items-center">
                 <div>
                   <p className="mb-4 pl-2">Email :</p>
                   <p className="text-center bg-black/25 px-2 py-2 rounded-md inline">
@@ -104,7 +56,6 @@ const UserInfo = ({ fetchUserDetails }) => {
               <div className="flex justify-between items-center">
                 <Link to={`/editprofile/${docId}`}>
                   <button
-                    onClick={() => setIsEditing(true)}
                     type="button"
                     className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg hover:bg-blue-800 transition-all duration-200"
                   >

@@ -10,30 +10,15 @@ import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import { UserAuth } from "../contexts/AuthContext";
 
-const Home = ({ fetchUserDetails, uploadProfile }) => {
+const Home = ({ fetchUserDetails }) => {
   const [myShoes, setMyShoes] = useState(shoes);
 
-  const {
-    // setUserName,
-    // setImageAsset,
-    // setEmail,
-    // setNumber,
-    // setAddress,
-    // setIsDone,
-    // setDocId,
-    user,
-    docId,
-  } = UserAuth();
+  const { user } = UserAuth();
 
   useEffect(() => {
     fetchUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.uid, user]);
-
-  useEffect(() => {
-    docId && uploadProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [docId]);
 
   // filter
   const filterBrands = (category) => {

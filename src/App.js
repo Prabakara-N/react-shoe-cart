@@ -11,15 +11,12 @@ import UserInfo from "./pages/UserInfo";
 import AddProfile from "./pages/AddProfile";
 import Error from "./pages/Error";
 import { UserAuth } from "./contexts/AuthContext";
-import { db, storage } from "./utils/firebase";
+import { db } from "./utils/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { toast } from "react-toastify";
 
 const App = () => {
   const {
     user,
-    isEditing,
     setUserName,
     setImageAsset,
     setEmail,
@@ -27,7 +24,6 @@ const App = () => {
     setAddress,
     setIsDone,
     setDocId,
-    setIsLoading,
   } = UserAuth();
 
   const fetchUserDetails = async () => {
@@ -57,38 +53,6 @@ const App = () => {
     }
   };
 
-  const uploadProfile = (img) => {
-    setIsLoading(true);
-    if (img) {
-      const imageFile = img;
-      const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, imageFile);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const uploadProgress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(uploadProgress);
-        },
-        (error) => {
-          toast.error(`Error while uploading : Try Again...`);
-          console.log(error);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 4000);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setImageAsset(downloadURL);
-            setIsLoading(false);
-            toast.success("Image uploaded successfully...!");
-          });
-        }
-      );
-    }
-  };
-
   return (
     <div className="overflow-hidden">
       <Router>
@@ -97,28 +61,15 @@ const App = () => {
           <Route path="signup" element={<SignUp />} />
           <Route
             path="home"
-            element={
-              <Home
-                fetchUserDetails={fetchUserDetails}
-                uploadProfile={uploadProfile}
-              />
-            }
+            element={<Home fetchUserDetails={fetchUserDetails} />}
           />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route
-            path="/userinfo/:id"
-            element={
-              <UserInfo
-                fetchUserDetails={fetchUserDetails}
-                uploadProfile={uploadProfile}
-              />
-            }
+            path="/userinfo"
+            element={<UserInfo fetchUserDetails={fetchUserDetails} />}
           />
           <Route path="/addprofile" element={<AddProfile />} />
-          <Route
-            path="/editprofile/:id"
-            element={isEditing && <AddProfile />}
-          />
+          <Route path="/editprofile/:id" element={<AddProfile />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>

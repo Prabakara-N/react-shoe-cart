@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import { UserAuth } from "../contexts/AuthContext";
 
@@ -13,17 +13,19 @@ import { OverlayTrigger } from "react-bootstrap";
 
 import {
   deleteObject,
+  getDownloadURL,
   ref,
-  // getDownloadURL,
-  // uploadBytesResumable,
+  uploadBytesResumable,
 } from "firebase/storage";
 
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 
 import { db, storage } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddProfile = ({ uploadProfile }) => {
+const AddProfile = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     user,
     userName,
@@ -37,11 +39,9 @@ const AddProfile = ({ uploadProfile }) => {
     imageAsset,
     setImageAsset,
     setIsDone,
-    isEditing,
-    docId,
-    isLoading,
-    setIsLoading,
   } = UserAuth();
+
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -65,42 +65,37 @@ const AddProfile = ({ uploadProfile }) => {
     </Tooltip>
   );
 
-  // const uploadProfile = (e) => {
-  //   setIsLoading(true);
-  //   if (e.target.files[0]) {
-  //     const imageFile = e.target.files[0];
-  //     const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
-  //     const uploadTask = uploadBytesResumable(storageRef, imageFile);
+  const uploadProfile = (e) => {
+    setIsLoading(true);
+    if (e.target.files[0]) {
+      const imageFile = e.target.files[0];
+      const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
-  //     uploadTask.on(
-  //       "state_changed",
-  //       (snapshot) => {
-  //         const uploadProgress =
-  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //         console.log(uploadProgress);
-  //       },
-  //       (error) => {
-  //         toast.error(`Error while uploading : Try Again...`);
-  //         console.log(error);
-  //         setTimeout(() => {
-  //           setIsLoading(false);
-  //         }, 4000);
-  //       },
-  //       () => {
-  //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-  //           setImageAsset(downloadURL);
-  //           setIsLoading(false);
-  //           toast.success("Image uploaded successfully...!");
-  //         });
-  //       }
-  //     );
-  //   }
-  // };
-
-  useEffect(() => {
-    docId && uploadProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [docId]);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const uploadProgress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(uploadProgress);
+        },
+        (error) => {
+          toast.error(`Error while uploading : Try Again...`);
+          console.log(error);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 4000);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImageAsset(downloadURL);
+            setIsLoading(false);
+            toast.success("Image uploaded successfully...!");
+          });
+        }
+      );
+    }
+  };
 
   const deleteImage = () => {
     setIsLoading(true);
@@ -113,8 +108,8 @@ const AddProfile = ({ uploadProfile }) => {
 
   const saveDetails = async (e) => {
     e.preventDefault();
-    if (userName && email && number && address) {
-      if (!docId) {
+    if (userName && email && number && address && user?.uid) {
+      if (!id) {
         try {
           await addDoc(collection(db, "userInfo"), {
             userName: userName,
@@ -122,22 +117,22 @@ const AddProfile = ({ uploadProfile }) => {
             email: email,
             number: number,
             address: address,
-            userId: user.uid,
+            userId: user?.uid,
           });
           setIsDone(true);
           toast.success("Profile Added Successfully");
         } catch (error) {
           console.log(error);
         }
-      } else if (isEditing) {
+      } else {
         try {
-          await updateDoc(doc(db, "userInfo", docId), {
+          await updateDoc(doc(db, "userInfo", id), {
             userName: userName,
             image: imageAsset,
             email: email,
             number: number,
             address: address,
-            userId: user.uid,
+            userId: user?.uid,
           });
           setIsDone(true);
           toast.success("Profile Updated Successfully");
@@ -145,7 +140,7 @@ const AddProfile = ({ uploadProfile }) => {
           console.log(error);
         }
       }
-      navigate(`/userinfo/${user.uid}`);
+      navigate(`/userinfo`);
     } else {
       toast.error("All fields are mendatory to fill");
     }
@@ -174,7 +169,7 @@ const AddProfile = ({ uploadProfile }) => {
                     <input
                       type="file"
                       id="profile"
-                      onChange={(e) => uploadProfile(e.target.files[0])}
+                      onChange={uploadProfile}
                       accept="image/*"
                       className="hidden"
                     />

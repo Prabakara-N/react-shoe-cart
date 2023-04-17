@@ -19,8 +19,6 @@ const AuthContextProvider = ({ children }) => {
   const [address, setAddress] = useState("");
   const [docId, setDocId] = useState("");
   const [isDone, setIsDone] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const clearUserData = () => {
     setImageAsset(null);
@@ -78,12 +76,8 @@ const AuthContextProvider = ({ children }) => {
         setImageAsset,
         isDone,
         setIsDone,
-        isEditing,
-        setIsEditing,
         docId,
         setDocId,
-        isLoading,
-        setIsLoading,
       }}
     >
       {children}

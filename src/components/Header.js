@@ -25,7 +25,7 @@ const Header = () => {
 
   const { isOpen, setIsOpen } = useContext(SidebarContext);
 
-  const { user, imageAsset } = UserAuth();
+  const { imageAsset } = UserAuth();
 
   const renderTooltip = (props) => (
     <Tooltip
@@ -70,7 +70,7 @@ const Header = () => {
               overlay={renderTooltip}
             >
               <div>
-                <Link to={`/userinfo/${user?.uid}`}>
+                <Link to={`/userinfo`}>
                   <img
                     src={`${imageAsset ? imageAsset : userLogo}`}
                     alt="user-logo"
