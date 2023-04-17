@@ -49,6 +49,7 @@ const Home = () => {
       }
     };
     fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.uid, user]);
 
   // filter

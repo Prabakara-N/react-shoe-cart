@@ -21,7 +21,7 @@ import {
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 
 import { db, storage } from "../utils/firebase";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,9 +39,9 @@ const AddProfile = () => {
     imageAsset,
     setImageAsset,
     setIsDone,
+    isEditing,
+    docId,
   } = UserAuth();
-
-  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -57,32 +57,34 @@ const AddProfile = () => {
 
   const uploadProfile = (e) => {
     setIsLoading(true);
-    const imageFile = e.target.files[0];
-    const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    if (e.target.files[0]) {
+      const imageFile = e.target.files[0];
+      const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const uploadProgress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(uploadProgress);
-      },
-      (error) => {
-        toast.error(`Error while uploading : Try Again...`);
-        console.log(error);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 4000);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImageAsset(downloadURL);
-          setIsLoading(false);
-          toast.success("Image uploaded successfully...!");
-        });
-      }
-    );
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const uploadProgress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(uploadProgress);
+        },
+        (error) => {
+          toast.error(`Error while uploading : Try Again...`);
+          console.log(error);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 4000);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setImageAsset(downloadURL);
+            setIsLoading(false);
+            toast.success("Image uploaded successfully...!");
+          });
+        }
+      );
+    }
   };
 
   const deleteImage = () => {
@@ -91,17 +93,17 @@ const AddProfile = () => {
     deleteObject(deleteRef).then(() => {
       setImageAsset(null);
       setIsLoading(false);
-      toast.success("Image Deleted successfully...!");
     });
   };
 
   const saveDetails = async (e) => {
     e.preventDefault();
     if (userName && email && number && address) {
-      if (!id) {
+      if (!docId) {
         try {
           await addDoc(collection(db, "userInfo"), {
             userName: userName,
+            image: imageAsset,
             email: email,
             number: number,
             address: address,
@@ -112,10 +114,11 @@ const AddProfile = () => {
         } catch (error) {
           console.log(error);
         }
-      } else {
+      } else if (isEditing) {
         try {
-          await updateDoc(doc(db, "userInfo", id), {
+          await updateDoc(doc(db, "userInfo", docId), {
             userName: userName,
+            image: imageAsset,
             email: email,
             number: number,
             address: address,

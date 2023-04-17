@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import profile from "../assets/images/user.png";
 import Header from "../components/Header";
 import { UserAuth } from "../contexts/AuthContext";
@@ -17,15 +17,17 @@ const UserInfo = () => {
     number,
     address,
     imageAsset,
+    setImageAsset,
     isDone,
     setIsDone,
     setUserName,
     setEmail,
     setNumber,
     setAddress,
+    setIsEditing,
+    docId,
+    setDocId,
   } = UserAuth();
-
-  const { id } = useParams();
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -35,25 +37,36 @@ const UserInfo = () => {
           where("userId", "==", user?.uid)
         );
         const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map((doc) => doc.data())[0];
-        setUserName(data.userName);
-        setEmail(data.email);
-        setNumber(data.number);
-        setAddress(data.address);
-        setIsDone(true);
 
-        return user?.uid;
+        querySnapshot.docs.map((doc) => {
+          setDocId(doc.id);
+          const userData = doc.data();
+          console.log(userData);
+          if (userData) {
+            setUserName(userData.userName);
+            setImageAsset(userData.image);
+            setEmail(userData.email);
+            setNumber(userData.number);
+            setAddress(userData.address);
+            setIsDone(true);
+          } else {
+            setIsDone(false);
+          }
+
+          return doc.id;
+        });
       }
     };
     fetchUserDetails();
-  }, [user?.uid]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid, user]);
 
   return (
     <>
       <Header />
       <div className="bg-slate-800 w-full h-full flex flex-col min-h-screen justify-center items-center text-white">
         <div className="bg-slate-900/50 rounded-lg p-6 w-[95%] sm:w-[450px] flex flex-col gap-y-8 mt-16">
-          {user && user?.uid === id && isDone ? (
+          {user && user?.uid && isDone ? (
             <>
               <div className="-mt-16">
                 <img
@@ -87,10 +100,11 @@ const UserInfo = () => {
                 <p className="bg-black/25 px-3 py-2 rounded-md">{address}</p>
               </div>
               <div className="flex justify-between items-center">
-                <Link to={`/editprofile/${id}`}>
+                <Link to={`/editprofile/${docId}`}>
                   <button
-                    className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg hover:bg-blue-800 transition-all duration-200"
+                    onClick={() => setIsEditing(true)}
                     type="button"
+                    className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg hover:bg-blue-800 transition-all duration-200"
                   >
                     Edit <AiFillEdit />
                   </button>
@@ -146,7 +160,7 @@ const UserInfo = () => {
                     className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg hover:bg-blue-800 transition-all duration-200"
                     type="button"
                   >
-                    Edit Profile <AiFillEdit />
+                    Add Profile <AiFillEdit />
                   </button>
                 </Link>
               </div>
