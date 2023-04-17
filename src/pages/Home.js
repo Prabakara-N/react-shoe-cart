@@ -9,48 +9,31 @@ import Product from "../components/Product";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import { UserAuth } from "../contexts/AuthContext";
-import { db } from "../utils/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
 
-const Home = () => {
+const Home = ({ fetchUserDetails, uploadProfile }) => {
   const [myShoes, setMyShoes] = useState(shoes);
 
   const {
-    setUserName,
-    setImageAsset,
-    setEmail,
-    setNumber,
-    setAddress,
-    setIsDone,
+    // setUserName,
+    // setImageAsset,
+    // setEmail,
+    // setNumber,
+    // setAddress,
+    // setIsDone,
+    // setDocId,
     user,
+    docId,
   } = UserAuth();
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      if (user && user?.uid) {
-        const q = query(
-          collection(db, "userInfo"),
-          where("userId", "==", user?.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map((doc) => doc.data())[0];
-        if (data) {
-          setUserName(data.userName);
-          setImageAsset(data.image);
-          setEmail(data.email);
-          setNumber(data.number);
-          setAddress(data.address);
-          setIsDone(true);
-        } else {
-          setIsDone(false);
-        }
-
-        return user?.uid;
-      }
-    };
     fetchUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.uid, user]);
+
+  useEffect(() => {
+    docId && uploadProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [docId]);
 
   // filter
   const filterBrands = (category) => {

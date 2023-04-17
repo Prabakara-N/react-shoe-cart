@@ -6,10 +6,7 @@ import profile from "../assets/images/user.png";
 import Header from "../components/Header";
 import { UserAuth } from "../contexts/AuthContext";
 
-import { db } from "../utils/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
-
-const UserInfo = () => {
+const UserInfo = ({ fetchUserDetails }) => {
   const {
     user,
     userName,
@@ -17,49 +14,54 @@ const UserInfo = () => {
     number,
     address,
     imageAsset,
-    setImageAsset,
     isDone,
-    setIsDone,
-    setUserName,
-    setEmail,
-    setNumber,
-    setAddress,
+    // setImageAsset,
+    // setIsDone,
+    // setUserName,
+    // setEmail,
+    // setNumber,
+    // setAddress,
+    // setDocId,
     setIsEditing,
     docId,
-    setDocId,
   } = UserAuth();
 
+  // useEffect(() => {
+  //   const fetchUserDetails = async () => {
+  //     if (user && user?.uid) {
+  //       const q = query(
+  //         collection(db, "userInfo"),
+  //         where("userId", "==", user?.uid)
+  //       );
+  //       const querySnapshot = await getDocs(q);
+
+  //       querySnapshot.docs.map((doc) => {
+  //         setDocId(doc.id);
+  //         const userData = doc.data();
+  //         console.log(userData);
+  //         if (userData) {
+  //           setUserName(userData.userName);
+  //           setImageAsset(userData.image);
+  //           setEmail(userData.email);
+  //           setNumber(userData.number);
+  //           setAddress(userData.address);
+  //           setIsDone(true);
+  //         } else {
+  //           setIsDone(false);
+  //         }
+
+  //         return doc.id;
+  //       });
+  //     }
+  //   };
+  //   fetchUserDetails();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [user?.uid, user]);
+
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      if (user && user?.uid) {
-        const q = query(
-          collection(db, "userInfo"),
-          where("userId", "==", user?.uid)
-        );
-        const querySnapshot = await getDocs(q);
-
-        querySnapshot.docs.map((doc) => {
-          setDocId(doc.id);
-          const userData = doc.data();
-          console.log(userData);
-          if (userData) {
-            setUserName(userData.userName);
-            setImageAsset(userData.image);
-            setEmail(userData.email);
-            setNumber(userData.number);
-            setAddress(userData.address);
-            setIsDone(true);
-          } else {
-            setIsDone(false);
-          }
-
-          return doc.id;
-        });
-      }
-    };
     fetchUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.uid, user]);
+  }, [user, user?.uid]);
 
   return (
     <>

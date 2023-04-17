@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import { UserAuth } from "../contexts/AuthContext";
 
@@ -13,9 +13,9 @@ import { OverlayTrigger } from "react-bootstrap";
 
 import {
   deleteObject,
-  getDownloadURL,
   ref,
-  uploadBytesResumable,
+  // getDownloadURL,
+  // uploadBytesResumable,
 } from "firebase/storage";
 
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
@@ -23,9 +23,7 @@ import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 
-const AddProfile = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
+const AddProfile = ({ uploadProfile }) => {
   const {
     user,
     userName,
@@ -41,6 +39,8 @@ const AddProfile = () => {
     setIsDone,
     isEditing,
     docId,
+    isLoading,
+    setIsLoading,
   } = UserAuth();
 
   const navigate = useNavigate();
@@ -55,37 +55,52 @@ const AddProfile = () => {
     </Tooltip>
   );
 
-  const uploadProfile = (e) => {
-    setIsLoading(true);
-    if (e.target.files[0]) {
-      const imageFile = e.target.files[0];
-      const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+  const tooltipRender = (props) => (
+    <Tooltip
+      className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs"
+      id="button-tooltip"
+      {...props}
+    >
+      Add Profile Picture
+    </Tooltip>
+  );
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const uploadProgress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(uploadProgress);
-        },
-        (error) => {
-          toast.error(`Error while uploading : Try Again...`);
-          console.log(error);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 4000);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setImageAsset(downloadURL);
-            setIsLoading(false);
-            toast.success("Image uploaded successfully...!");
-          });
-        }
-      );
-    }
-  };
+  // const uploadProfile = (e) => {
+  //   setIsLoading(true);
+  //   if (e.target.files[0]) {
+  //     const imageFile = e.target.files[0];
+  //     const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+  //     const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+  //     uploadTask.on(
+  //       "state_changed",
+  //       (snapshot) => {
+  //         const uploadProgress =
+  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //         console.log(uploadProgress);
+  //       },
+  //       (error) => {
+  //         toast.error(`Error while uploading : Try Again...`);
+  //         console.log(error);
+  //         setTimeout(() => {
+  //           setIsLoading(false);
+  //         }, 4000);
+  //       },
+  //       () => {
+  //         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+  //           setImageAsset(downloadURL);
+  //           setIsLoading(false);
+  //           toast.success("Image uploaded successfully...!");
+  //         });
+  //       }
+  //     );
+  //   }
+  // };
+
+  useEffect(() => {
+    docId && uploadProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [docId]);
 
   const deleteImage = () => {
     setIsLoading(true);
@@ -147,13 +162,19 @@ const AddProfile = () => {
               {!imageAsset ? (
                 <>
                   <label htmlFor="profile">
-                    <div className="w-[100px] h-[100px] mx-auto bg-black/60 rounded-full flex items-center justify-center -mt-20 cursor-pointer">
-                      <FcAddImage className="w-[45px] h-[45px]  " />
-                    </div>
+                    <OverlayTrigger
+                      placement="right"
+                      delay={{ show: 200, hide: 100 }}
+                      overlay={tooltipRender}
+                    >
+                      <div className="w-[100px] h-[100px] mx-auto bg-black/60 rounded-full flex items-center justify-center -mt-20 cursor-pointer">
+                        <FcAddImage className="w-[45px] h-[45px]  " />
+                      </div>
+                    </OverlayTrigger>
                     <input
                       type="file"
                       id="profile"
-                      onChange={uploadProfile}
+                      onChange={(e) => uploadProfile(e.target.files[0])}
                       accept="image/*"
                       className="hidden"
                     />
