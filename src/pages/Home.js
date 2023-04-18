@@ -9,6 +9,7 @@ import Product from "../components/Product";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import { UserAuth } from "../contexts/AuthContext";
+import { Slide, ToastContainer } from "react-toastify";
 
 const Home = ({ fetchUserDetails }) => {
   const [myShoes, setMyShoes] = useState(shoes);
@@ -45,6 +46,11 @@ const Home = ({ fetchUserDetails }) => {
   return (
     <div>
       <Header />
+      <ToastContainer
+        position="top-right"
+        pauseOnHover={false}
+        transition={Slide}
+      />
       <Hero />
       <Filter filterBrands={filterBrands} brands={brands} />
       <section className="py-16 px-3 lg:px-11 bg-slate-800">

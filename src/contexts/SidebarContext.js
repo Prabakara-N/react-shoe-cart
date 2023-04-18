@@ -10,6 +10,7 @@ const SidebarProvider = ({ children }) => {
   const handleClose = () => {
     setIsOpen(false);
   };
+
   return (
     <SidebarContext.Provider value={{ isOpen, setIsOpen, handleClose }}>
       {children}

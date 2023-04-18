@@ -8,13 +8,13 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import UserInfo from "./pages/UserInfo";
 import AddProfile from "./pages/AddProfile";
+import Checkout from "./pages/Checkout";
 import Error from "./pages/Error";
 // user context
 import { UserAuth } from "./contexts/AuthContext";
 // firebase
 import { db } from "./utils/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import Checkout from "./pages/Checkout";
 
 const App = () => {
   const {

@@ -18,8 +18,6 @@ import { BsBag } from "react-icons/bs";
 import Alert from "./Alert";
 import { UserAuth } from "../contexts/AuthContext";
 
-import { ToastContainer, Slide } from "react-toastify";
-
 const Header = () => {
   // header state
   const [isActive, setIsActive] = useState(false);
@@ -52,11 +50,6 @@ const Header = () => {
           isActive ? "header" : "bg-[rgba(0,0,0,0.5)] py-4"
         } fixed w-full z-50 transition-all duration-300 `}
       >
-        <ToastContainer
-          position="top-right"
-          pauseOnHover={false}
-          transition={Slide}
-        />
         <div className="container mx-auto px-6 md:px-16 flex justify-between items-center h-full">
           <Link to={"/home"}>
             <img

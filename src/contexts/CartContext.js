@@ -19,6 +19,9 @@ const CartProvider = ({ children }) => {
   // total prize state
   const [total, setTotal] = useState(0);
 
+  // modal
+  let [isModalOpen, setModalIsOpen] = useState(false);
+
   // notification
   const [alertMsg, setAlertMsg] = useState({
     type: "",
@@ -152,6 +155,8 @@ const CartProvider = ({ children }) => {
         itemAmount,
         total,
         alertMsg,
+        isModalOpen,
+        setModalIsOpen,
       }}
     >
       {children}

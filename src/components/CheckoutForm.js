@@ -1,134 +1,188 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { UserAuth } from "../contexts/AuthContext";
+import { toast } from "react-toastify";
+import { CartContext } from "../contexts/CartContext";
+import { SidebarContext } from "../contexts/SidebarContext";
 
 const CheckoutForm = () => {
+  const [lastName, setLastName] = useState("");
+  const [city, setCity] = useState("");
+  const [postCode, setPostCode] = useState("");
+
+  const { userName, email, address, setUserName, setEmail, setAddress } =
+    UserAuth();
+  const { clearCart, setModalIsOpen } = useContext(CartContext);
+  const { setIsOpen } = useContext(SidebarContext);
+
+  // post code
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length > 6) {
+      setPostCode(inputValue.slice(0, 6));
+    } else {
+      setPostCode(inputValue);
+    }
+  };
+
+  // form submit
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (userName && email && address && city && postCode) {
+      clearCart();
+      setIsOpen(false);
+      setModalIsOpen(true);
+    } else {
+      setModalIsOpen(false);
+      toast.error("All fields are mendatory to fill");
+    }
+  };
+
   return (
     <>
-      <div class="flex flex-col md:w-full">
-        <h2 class="mb-4 font-bold md:text-xl text-heading ">
+      <div className="flex flex-col md:w-full">
+        <h2 className="mb-4 font-bold md:text-xl text-heading ">
           Shipping Address
         </h2>
-        <form class="justify-center w-full mx-auto" method="post" action>
-          <div class="">
-            <div class="space-x-0 lg:flex lg:space-x-4">
-              <div class="w-full lg:w-1/2">
+        <form
+          onSubmit={submitHandler}
+          className="justify-center w-full mx-auto"
+        >
+          <div className="">
+            <div className="space-x-0 lg:flex lg:space-x-4">
+              <div className="w-full lg:w-1/2">
                 <label
-                  for="firstName"
-                  class="block mb-3 text-sm font-semibold text-gray-500"
+                  htmlFor="firstName"
+                  className="block mb-3 text-sm font-semibold text-gray-500"
                 >
                   First Name
                 </label>
                 <input
+                  id="firstName"
                   name="firstName"
                   type="text"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                   placeholder="First Name"
-                  class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
-              <div class="w-full lg:w-1/2 ">
+              <div className="w-full lg:w-1/2 ">
                 <label
-                  for="firstName"
-                  class="block mb-3 text-sm font-semibold text-gray-500"
+                  htmlFor="lastName"
+                  className="block mb-3 text-sm font-semibold text-gray-500"
                 >
                   Last Name
                 </label>
                 <input
+                  id="lastName"
                   name="Last Name"
                   type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   placeholder="Last Name"
-                  class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
             </div>
-            <div class="mt-4">
-              <div class="w-full">
+            <div className="mt-4">
+              <div className="w-full">
                 <label
-                  for="Email"
-                  class="block mb-3 text-sm font-semibold text-gray-500"
+                  htmlFor="Email"
+                  className="block mb-3 text-sm font-semibold text-gray-500"
                 >
                   Email
                 </label>
                 <input
+                  id="Email"
                   name="Last Name"
                   type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
-                  class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
             </div>
-            <div class="mt-4">
-              <div class="w-full">
+            <div className="mt-4">
+              <div className="w-full">
                 <label
-                  for="Address"
-                  class="block mb-3 text-sm font-semibold text-gray-500"
+                  htmlFor="Address"
+                  className="block mb-3 text-sm font-semibold text-gray-500"
                 >
                   Address
                 </label>
                 <textarea
-                  class="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  id="Address"
+                  className="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                   name="Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   cols="20"
-                  rows="4"
+                  rows="3"
                   placeholder="Address"
                 ></textarea>
               </div>
             </div>
-            <div class="space-x-0 lg:flex lg:space-x-4">
-              <div class="w-full lg:w-1/2">
+            <div className="space-x-0 lg:flex lg:space-x-4">
+              <div className="w-full lg:w-1/2">
                 <label
-                  for="city"
-                  class="block mb-3 text-sm font-semibold text-gray-500"
+                  htmlFor="city"
+                  className="block mb-3 text-sm font-semibold text-gray-500"
                 >
                   City
                 </label>
                 <input
+                  id="city"
                   name="city"
                   type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                   placeholder="City"
-                  class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
-              <div class="w-full lg:w-1/2 ">
+              <div className="w-full lg:w-1/2 ">
                 <label
-                  for="postcode"
-                  class="block mb-3 text-sm font-semibold text-gray-500"
+                  htmlFor="postcode"
+                  className="block mb-3 text-sm font-semibold text-gray-500"
                 >
                   Postcode
                 </label>
                 <input
+                  id="postcode"
                   name="postcode"
-                  type="text"
+                  type="number"
+                  minLength={6}
+                  maxLength={6}
+                  value={postCode}
+                  onChange={handleInputChange}
                   placeholder="Post Code"
-                  class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
             </div>
-            <div class="flex items-center mt-4">
-              <label class="flex items-center text-sm group text-heading">
-                <input
-                  type="checkbox"
-                  class="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:ring-1"
-                />
-                <span class="ml-2">Save this information for next time</span>
-              </label>
-            </div>
-            <div class="relative pt-3 xl:pt-6">
+            <div className="flex items-center mt-4">
               <label
-                for="note"
-                class="block mb-3 text-sm font-semibold text-gray-500"
+                htmlFor="tick"
+                className="flex items-center text-sm group text-heading"
               >
-                {" "}
-                Notes (Optional)
+                <input
+                  id="tick"
+                  type="checkbox"
+                  className="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:ring-1 cursor-pointer"
+                />
+                <span className="ml-2">
+                  Save this information for next time
+                </span>
               </label>
-              <textarea
-                name="note"
-                class="flex items-center w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-600"
-                rows="4"
-                placeholder="Notes for delivery"
-              ></textarea>
             </div>
-            <div class="mt-4">
-              <button class="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900">
-                Process
+
+            <div className="mt-4">
+              <button
+                type="submit"
+                className="w-full px-6 py-2 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
+              >
+                Proceed
               </button>
             </div>
           </div>

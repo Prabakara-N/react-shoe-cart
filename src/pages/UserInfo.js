@@ -32,28 +32,26 @@ const UserInfo = ({ fetchUserDetails }) => {
               <div className="text-center">
                 <p className="mb-2">Name :</p>
                 <h2 className="text-center text-lg font-medium bg-black/25 px-2 py-1 rounded-md capitalize inline">
-                  {userName ? userName : "Add User Name"}
+                  {userName}
                 </h2>
               </div>
               <div className="flex flex-col gap-y-5 sm:flex-row sm:justify-between lg:items-center">
                 <div>
                   <p className="mb-4 pl-2">Email :</p>
                   <p className="text-center bg-black/25 px-2 py-2 rounded-md inline">
-                    {email ? email : "Add Email"}
+                    {email}
                   </p>
                 </div>
                 <div>
                   <p className="mb-4 pl-2">Number :</p>
                   <p className="text-center bg-black/25 px-2 py-2 rounded-md inline">
-                    {number ? number : "Add Mobile Number"}
+                    {number}
                   </p>
                 </div>
               </div>
               <div>
                 <p className="mb-2 pl-2">Address :</p>
-                <p className="bg-black/25 px-3 py-2 rounded-md">
-                  {address ? address : "Add Address"}
-                </p>
+                <p className="bg-black/25 px-3 py-2 rounded-md">{address}</p>
               </div>
               <div className="flex justify-between items-center">
                 <Link to={`/editprofile/${docId}`}>
