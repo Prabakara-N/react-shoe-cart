@@ -38,7 +38,6 @@ const AddProfile = () => {
     setAddress,
     imageAsset,
     setImageAsset,
-    setIsDone,
   } = UserAuth();
 
   const { id } = useParams();
@@ -65,6 +64,7 @@ const AddProfile = () => {
     </Tooltip>
   );
 
+  // upload profile picture
   const uploadProfile = (e) => {
     setIsLoading(true);
     if (e.target.files[0]) {
@@ -78,6 +78,7 @@ const AddProfile = () => {
           const uploadProgress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(uploadProgress);
+          toast.promise("uploading...Please wait...");
         },
         (error) => {
           toast.error(`Error while uploading : Try Again...`);
@@ -97,6 +98,7 @@ const AddProfile = () => {
     }
   };
 
+  // delete image
   const deleteImage = () => {
     setIsLoading(true);
     const deleteRef = ref(storage, imageAsset);
@@ -106,6 +108,7 @@ const AddProfile = () => {
     });
   };
 
+  // saving user details
   const saveDetails = async (e) => {
     e.preventDefault();
     if (userName && email && number && address && user?.uid) {
@@ -117,9 +120,8 @@ const AddProfile = () => {
             email: email,
             number: number,
             address: address,
-            userId: user?.uid,
+            userId: user.uid,
           });
-          setIsDone(true);
           toast.success("Profile Added Successfully");
         } catch (error) {
           console.log(error);
@@ -132,9 +134,8 @@ const AddProfile = () => {
             email: email,
             number: number,
             address: address,
-            userId: user?.uid,
+            userId: user.uid,
           });
-          setIsDone(true);
           toast.success("Profile Updated Successfully");
         } catch (error) {
           console.log(error);
@@ -142,7 +143,7 @@ const AddProfile = () => {
       }
       navigate(`/userinfo`);
     } else {
-      toast.error("All fields are mendatory to fill");
+      toast.error("All fields are mandatory to fill");
     }
   };
 
