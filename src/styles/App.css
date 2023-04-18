@@ -60,7 +60,7 @@ body {
 
 .alert {
   background-color: transparent;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: var(--box-shadow);
   font-weight: 700;
   display: flex;

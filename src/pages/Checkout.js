@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import CheckoutForm from "../components/CheckoutForm";
 import Orders from "../components/Orders";
 import { MdKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
 import Modal from "../components/Modal";
+import { SidebarContext } from "../contexts/SidebarContext";
 
 const Checkout = () => {
+  const { setIsOpen } = useContext(SidebarContext);
+
   return (
     <>
       <ToastContainer
@@ -17,7 +20,10 @@ const Checkout = () => {
       <Modal />
       <div className="relative">
         <Link to={"/home"}>
-          <div className="absolute p-[2px] sm:p-1 bottom-6 md:bottom-0 md:left-12 left-3 rounded-full hover:bg-slate-900/20 transition-all duration-300 cursor-pointer">
+          <div
+            onClick={() => setIsOpen(false)}
+            className="absolute p-[2px] sm:p-1 bottom-6 md:bottom-0 md:left-12 left-3 rounded-full hover:bg-slate-900/20 transition-all duration-300 cursor-pointer"
+          >
             <MdKeyboardBackspace className="text-2xl md:text-3xl" />
           </div>
         </Link>

@@ -297,7 +297,7 @@ const CheckoutForm = () => {
                 type="submit"
                 className="w-full px-6 py-2 rounded-md font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
               >
-                Proceed to pay
+                Proceed To Pay
               </button>
             </div>
           </div>

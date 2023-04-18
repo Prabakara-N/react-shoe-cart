@@ -8,9 +8,11 @@ import { HiTag } from "react-icons/hi";
 
 // import cart context
 import { CartContext } from "../contexts/CartContext";
+import { SidebarContext } from "../contexts/SidebarContext";
 
 const Product = ({ product }) => {
   const { addToCart } = useContext(CartContext);
+  const { setIsOpen } = useContext(SidebarContext);
 
   // destructure product
   const { id, image, title, category, price, originalPrize, offers, rating } =
@@ -38,6 +40,7 @@ const Product = ({ product }) => {
               </div>
             </button>
             <Link
+              onClick={() => setIsOpen(false)}
               to={`/product/${id}`}
               className="w-8 h-8 bg-white flex justify-center items-center text-primary drop-shadow-xl hover:bg-slate-200 transition-all duration-300"
             >
