@@ -22,10 +22,11 @@ const App = () => {
     setEmail,
     setNumber,
     setAddress,
-    setIsDone,
     setDocId,
+    setUserId,
   } = UserAuth();
 
+  // getting user profile
   const fetchUserDetails = async () => {
     if (user && user?.uid) {
       const q = query(
@@ -37,16 +38,13 @@ const App = () => {
       querySnapshot.docs.map((doc) => {
         setDocId(doc.id);
         const userData = doc.data();
-        console.log(userData);
         if (userData) {
+          setUserId(userData.userId);
           setUserName(userData.userName);
           setImageAsset(userData.image);
           setEmail(userData.email);
           setNumber(userData.number);
           setAddress(userData.address);
-          setIsDone(true);
-        } else {
-          setIsDone(false);
         }
         return doc.id;
       });

@@ -17,8 +17,8 @@ const AuthContextProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [docId, setDocId] = useState("");
-  const [isDone, setIsDone] = useState(false);
+  const [docId, setDocId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const clearUserData = () => {
     setImageAsset(null);
@@ -30,6 +30,7 @@ const AuthContextProvider = ({ children }) => {
 
   // signUp
   const signUp = (email, password) => {
+    clearUserData();
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -74,10 +75,10 @@ const AuthContextProvider = ({ children }) => {
         setAddress,
         imageAsset,
         setImageAsset,
-        isDone,
-        setIsDone,
         docId,
         setDocId,
+        userId,
+        setUserId,
       }}
     >
       {children}
