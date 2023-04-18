@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import { FcOk } from "react-icons/fc";
 
 const Modal = () => {
-  const { isModalOpen, setModalIsOpen } = useContext(CartContext);
+  const { clearCart, isModalOpen, setModalIsOpen } = useContext(CartContext);
 
   function closeModal() {
     setModalIsOpen(false);
+    clearCart();
   }
 
   return (

@@ -14,7 +14,7 @@ const CheckoutForm = () => {
 
   const { userName, email, address, setUserName, setEmail, setAddress } =
     UserAuth();
-  const { clearCart, setModalIsOpen } = useContext(CartContext);
+  const { setModalIsOpen } = useContext(CartContext);
   const { setIsOpen } = useContext(SidebarContext);
 
   // post code
@@ -81,7 +81,6 @@ const CheckoutForm = () => {
       } else if (year < 2022) {
         toast.error("Card Expired...Please enter a valid card details");
       } else {
-        clearCart();
         setIsOpen(false);
         setModalIsOpen(true);
       }
@@ -112,7 +111,6 @@ const CheckoutForm = () => {
                 </label>
                 <input
                   id="firstName"
-                  name="firstName"
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
@@ -129,7 +127,6 @@ const CheckoutForm = () => {
                 </label>
                 <input
                   id="lastName"
-                  name="Last Name"
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
@@ -148,7 +145,6 @@ const CheckoutForm = () => {
                 </label>
                 <input
                   id="Email"
-                  name="Last Name"
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -187,7 +183,6 @@ const CheckoutForm = () => {
                 </label>
                 <input
                   id="city"
-                  name="city"
                   type="text"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
@@ -204,7 +199,6 @@ const CheckoutForm = () => {
                 </label>
                 <input
                   id="postcode"
-                  name="postcode"
                   type="number"
                   minLength={6}
                   maxLength={6}
@@ -250,12 +244,12 @@ const CheckoutForm = () => {
                   </label>
                   <input
                     id="year"
-                    name="postcode"
                     type="number"
                     minLength={4}
                     maxLength={4}
                     value={year}
                     onChange={handleYear}
+                    autoComplete="off"
                     placeholder="Expiry Date"
                     className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                   />
@@ -269,11 +263,11 @@ const CheckoutForm = () => {
                   </label>
                   <input
                     id="cvv"
-                    name="postcode"
                     type="number"
                     minLength={3}
                     maxLength={3}
                     value={cvv}
+                    autoComplete="off"
                     onChange={handleCvv}
                     placeholder="CVV"
                     className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
