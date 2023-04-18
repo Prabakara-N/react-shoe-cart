@@ -22,7 +22,7 @@ const Checkout = () => {
         <Link to={"/home"}>
           <div
             onClick={() => setIsOpen(false)}
-            className="absolute p-[2px] sm:p-1 bottom-6 md:bottom-0 md:left-12 left-3 rounded-full hover:bg-slate-900/20 transition-all duration-200 cursor-pointer"
+            className="absolute p-[2px] sm:p-1 bottom-6 md:bottom-0 md:left-12 left-3 rounded-full hover:bg-slate-900/20 transition-all duration-300 cursor-pointer"
           >
             <MdKeyboardBackspace className="text-2xl md:text-3xl" />
           </div>
