@@ -17,16 +17,16 @@ import { BsBag } from "react-icons/bs";
 // alert
 import Alert from "./Alert";
 import { UserAuth } from "../contexts/AuthContext";
-import { ToastContainer } from "react-toastify";
+
+import { ToastContainer, Slide } from "react-toastify";
 
 const Header = () => {
   // header state
   const [isActive, setIsActive] = useState(false);
-
   const { isOpen, setIsOpen } = useContext(SidebarContext);
-
   const { imageAsset } = UserAuth();
 
+  // bootstrap tooltip
   const renderTooltip = (props) => (
     <Tooltip
       className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
@@ -37,8 +37,7 @@ const Header = () => {
     </Tooltip>
   );
 
-  // eventlistneres
-
+  // eventlisteneres
   useEffect(() => {
     window.addEventListener("scroll", () => {
       window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
@@ -53,8 +52,11 @@ const Header = () => {
           isActive ? "header" : "bg-[rgba(0,0,0,0.5)] py-4"
         } fixed w-full z-50 transition-all duration-300 `}
       >
-        <ToastContainer position="top-right" />
-
+        <ToastContainer
+          position="top-right"
+          pauseOnHover={false}
+          transition={Slide}
+        />
         <div className="container mx-auto px-6 md:px-16 flex justify-between items-center h-full">
           <Link to={"/home"}>
             <img
