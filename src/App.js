@@ -14,6 +14,7 @@ import { UserAuth } from "./contexts/AuthContext";
 // firebase
 import { db } from "./utils/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Checkout from "./pages/Checkout";
 
 const App = () => {
   const {
@@ -63,6 +64,7 @@ const App = () => {
             element={<Home fetchUserDetails={fetchUserDetails} />}
           />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route
             path="/userinfo"
             element={<UserInfo fetchUserDetails={fetchUserDetails} />}

@@ -62,13 +62,13 @@ const Sidebar = () => {
           </div>
         </div>
         <Link
-          to={"/home"}
+          to={"/checkout"}
           className="bg-gray-200 flex p-4 z-30 justify-center items-center w-full font-medium hover:bg-slate-300"
         >
           Buy Now
         </Link>
         <Link
-          to={"/home"}
+          to={"/checkout"}
           className="bg-gray-600 z-30 text-white flex p-4 justify-center items-center w-full font-medium "
         >
           Checkout
