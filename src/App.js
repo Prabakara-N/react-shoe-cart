@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-
 // import pages
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -10,7 +9,9 @@ import ProductDetails from "./pages/ProductDetails";
 import UserInfo from "./pages/UserInfo";
 import AddProfile from "./pages/AddProfile";
 import Error from "./pages/Error";
+// user context
 import { UserAuth } from "./contexts/AuthContext";
+// firebase
 import { db } from "./utils/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
