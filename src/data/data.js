@@ -88,8 +88,8 @@ const shoes = [
       "https://res.cloudinary.com/daxmjqsy2/image/upload/v1679395151/adidas-y-bg_bua2wm.jpg",
     description:
       "Air delivers on our most daring dream: helping every athlete feel the unparalleled sensation of walking on air, while protecting the environment where we live and play. All Air soles contain at least 50% recycled materials, and are made with 100% renewable energy. Light on your feet. Lighter on waste.",
-    price: 1200,
-    originalPrize: 1499,
+    price: 112,
+    originalPrize: 132,
     offers: "20% offer",
     rating: 4.2,
     category: "Adidas",

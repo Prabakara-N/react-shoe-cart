@@ -8,6 +8,9 @@ const CheckoutForm = () => {
   const [lastName, setLastName] = useState("");
   const [city, setCity] = useState("");
   const [postCode, setPostCode] = useState("");
+  const [cardNum, setCardNum] = useState("");
+  const [year, setYear] = useState("");
+  const [cvv, setCvv] = useState("");
 
   const { userName, email, address, setUserName, setEmail, setAddress } =
     UserAuth();
@@ -15,7 +18,7 @@ const CheckoutForm = () => {
   const { setIsOpen } = useContext(SidebarContext);
 
   // post code
-  const handleInputChange = (e) => {
+  const handlePostCode = (e) => {
     const inputValue = e.target.value;
     if (inputValue.length > 6) {
       setPostCode(inputValue.slice(0, 6));
@@ -24,13 +27,64 @@ const CheckoutForm = () => {
     }
   };
 
+  // card number
+  const handleCardNum = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length > 16) {
+      setCardNum(inputValue.slice(0, 16));
+    } else {
+      setCardNum(inputValue);
+    }
+  };
+
+  // year
+  const handleYear = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length > 4) {
+      setYear(inputValue.slice(0, 4));
+    } else {
+      setYear(inputValue);
+    }
+  };
+
+  // cvv
+  const handleCvv = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length > 3) {
+      setCvv(inputValue.slice(0, 3));
+    } else {
+      setCvv(inputValue);
+    }
+  };
+
   // form submit
   const submitHandler = (e) => {
     e.preventDefault();
-    if (userName && email && address && city && postCode) {
-      clearCart();
-      setIsOpen(false);
-      setModalIsOpen(true);
+    if (
+      userName &&
+      email &&
+      address &&
+      city &&
+      postCode &&
+      cardNum &&
+      year &&
+      cvv
+    ) {
+      if (postCode.length < 6) {
+        toast.error("Post code must be 6 digits");
+      } else if (cardNum.length < 16) {
+        toast.error("Card Number must be 16 digits");
+      } else if (cvv.length < 3) {
+        toast.error("CVV Number must be 3 digits");
+      } else if (year.length < 4) {
+        toast.error("Year Number must be 4 digits");
+      } else if (year < 2022) {
+        toast.error("Card Expired...Please enter a valid card details");
+      } else {
+        clearCart();
+        setIsOpen(false);
+        setModalIsOpen(true);
+      }
     } else {
       setModalIsOpen(false);
       toast.error("All fields are mendatory to fill");
@@ -69,7 +123,7 @@ const CheckoutForm = () => {
               <div className="w-full lg:w-1/2 ">
                 <label
                   htmlFor="lastName"
-                  className="block mb-3 text-sm font-semibold text-gray-500"
+                  className="block mb-3 text-sm font-semibold text-gray-500 mt-3 md:mt-0"
                 >
                   Last Name
                 </label>
@@ -127,7 +181,7 @@ const CheckoutForm = () => {
               <div className="w-full lg:w-1/2">
                 <label
                   htmlFor="city"
-                  className="block mb-3 text-sm font-semibold text-gray-500"
+                  className="block mb-3 mt-3 md:mt-0 text-sm font-semibold text-gray-500"
                 >
                   City
                 </label>
@@ -144,7 +198,7 @@ const CheckoutForm = () => {
               <div className="w-full lg:w-1/2 ">
                 <label
                   htmlFor="postcode"
-                  className="block mb-3 text-sm font-semibold text-gray-500"
+                  className="block mb-3 mt-3 md:mt-0 text-sm font-semibold text-gray-500"
                 >
                   Postcode
                 </label>
@@ -155,12 +209,79 @@ const CheckoutForm = () => {
                   minLength={6}
                   maxLength={6}
                   value={postCode}
-                  onChange={handleInputChange}
+                  onChange={handlePostCode}
                   placeholder="Post Code"
                   className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
             </div>
+
+            {/* card details */}
+            <h2 className="my-4 font-bold md:text-xl text-heading ">
+              Card Details
+            </h2>
+
+            <div className="space-x-0 lg:flex lg:space-x-4">
+              <div className="w-full lg:w-1/2">
+                <label
+                  htmlFor="card-num"
+                  className="block mb-3 text-sm font-semibold text-gray-500"
+                >
+                  Card Number
+                </label>
+                <input
+                  id="card-num"
+                  type="number"
+                  minLength={16}
+                  maxLength={16}
+                  value={cardNum}
+                  onChange={handleCardNum}
+                  placeholder="Card Number"
+                  className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
+              <div className="w-full flex gap-1 md:gap-3 mt-4 md:mt-0 lg:w-1/2 ">
+                <div className="w-full">
+                  <label
+                    htmlFor="year"
+                    className="block mb-3 text-sm font-semibold text-gray-500"
+                  >
+                    Expiry Year
+                  </label>
+                  <input
+                    id="year"
+                    name="postcode"
+                    type="number"
+                    minLength={4}
+                    maxLength={4}
+                    value={year}
+                    onChange={handleYear}
+                    placeholder="Expiry Date"
+                    className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  />
+                </div>
+                <div className="w-full">
+                  <label
+                    htmlFor="cvv"
+                    className="block mb-3 text-sm font-semibold text-gray-500"
+                  >
+                    CVV
+                  </label>
+                  <input
+                    id="cvv"
+                    name="postcode"
+                    type="number"
+                    minLength={3}
+                    maxLength={3}
+                    value={cvv}
+                    onChange={handleCvv}
+                    placeholder="CVV"
+                    className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="flex items-center mt-4">
               <label
                 htmlFor="tick"
@@ -180,9 +301,9 @@ const CheckoutForm = () => {
             <div className="mt-4">
               <button
                 type="submit"
-                className="w-full px-6 py-2 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
+                className="w-full px-6 py-2 rounded-md font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
               >
-                Proceed
+                Proceed to pay
               </button>
             </div>
           </div>

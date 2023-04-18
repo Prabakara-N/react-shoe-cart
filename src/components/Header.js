@@ -42,7 +42,7 @@ const Header = () => {
     });
   });
 
-  const { itemAmount } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
   return (
     <>
       <header
@@ -80,7 +80,7 @@ const Header = () => {
             >
               <BsBag className="text-white text-2xl" />
               <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
-                {itemAmount}
+                {cart.length}
               </div>
             </div>
           </div>
