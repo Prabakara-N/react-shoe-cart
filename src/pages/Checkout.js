@@ -27,8 +27,8 @@ const Checkout = () => {
             <MdKeyboardBackspace className="text-2xl md:text-3xl" />
           </div>
         </Link>
-        <h1 className="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">
-          Checkout Page
+        <h1 className="flex items-center justify-center font-bold text-gray-800 text-md lg:text-3xl">
+          Checkout
         </h1>
       </div>
       <div className="container p-6 md:p-12 mx-auto">

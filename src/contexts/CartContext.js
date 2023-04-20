@@ -108,12 +108,12 @@ const CartProvider = ({ children }) => {
     if (cart.length > 0) {
       setAlertMsg({
         type: "cart",
-        msg: "Items cleared successfully !",
+        msg: "Cart cleared successfully !",
       });
     } else {
       setAlertMsg({
         type: "clear",
-        msg: "Items cleared successfully !",
+        msg: "Cart cleared successfully !",
       });
     }
   };
