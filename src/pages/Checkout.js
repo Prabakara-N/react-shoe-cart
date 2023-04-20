@@ -32,7 +32,7 @@ const Checkout = () => {
         </h1>
       </div>
       <div className="container p-6 md:p-12 mx-auto">
-        <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
+        <div className="flex flex-col-reverse gap-8 -mt-16 md:mt-0 w-full px-0 mx-auto md:flex-row">
           <CheckoutForm />
           <Orders />
         </div>

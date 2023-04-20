@@ -12,10 +12,28 @@ const CheckoutForm = () => {
   const [year, setYear] = useState("");
   const [cvv, setCvv] = useState("");
 
-  const { userName, email, address, setUserName, setEmail, setAddress } =
-    UserAuth();
+  const {
+    userName,
+    email,
+    address,
+    number,
+    setNumber,
+    setUserName,
+    setEmail,
+    setAddress,
+  } = UserAuth();
   const { setModalIsOpen } = useContext(CartContext);
   const { setIsOpen } = useContext(SidebarContext);
+
+  // number
+  const handlePhNumber = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length > 11) {
+      setNumber(inputValue.slice(0, 11));
+    } else {
+      setNumber(inputValue);
+    }
+  };
 
   // post code
   const handlePostCode = (e) => {
@@ -63,6 +81,7 @@ const CheckoutForm = () => {
     if (
       userName &&
       email &&
+      number &&
       address &&
       city &&
       postCode &&
@@ -70,7 +89,9 @@ const CheckoutForm = () => {
       year &&
       cvv
     ) {
-      if (postCode.length < 6) {
+      if (number.length < 10) {
+        toast.error("Mobile Number must be 10 digits");
+      } else if (postCode.length < 6) {
         toast.error("Post code must be 6 digits");
       } else if (cardNum.length < 16) {
         toast.error("Card Number must be 16 digits");
@@ -100,7 +121,7 @@ const CheckoutForm = () => {
           onSubmit={submitHandler}
           className="justify-center w-full mx-auto"
         >
-          <div className="">
+          <div>
             <div className="space-x-0 lg:flex lg:space-x-4">
               <div className="w-full lg:w-1/2">
                 <label
@@ -135,8 +156,8 @@ const CheckoutForm = () => {
                 />
               </div>
             </div>
-            <div className="mt-4">
-              <div className="w-full">
+            <div className="mt-4 space-x-0 lg:flex lg:space-x-4">
+              <div className="w-full lg:w-1/2">
                 <label
                   htmlFor="Email"
                   className="block mb-3 text-sm font-semibold text-gray-500"
@@ -152,7 +173,24 @@ const CheckoutForm = () => {
                   className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />
               </div>
+              <div className="w-full lg:w-1/2 ">
+                <label
+                  htmlFor="number"
+                  className="block mb-3 text-sm font-semibold text-gray-500 mt-3 md:mt-0"
+                >
+                  Mobile Number
+                </label>
+                <input
+                  id="number"
+                  type="number"
+                  value={number}
+                  onChange={handlePhNumber}
+                  placeholder="Last Name"
+                  className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                />
+              </div>
             </div>
+            {/*  */}
             <div className="mt-4">
               <div className="w-full">
                 <label
