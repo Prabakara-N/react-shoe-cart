@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 // import pages
@@ -53,22 +53,21 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, user?.uid]);
+
   return (
     <div className="overflow-hidden">
       <Router>
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
-          <Route
-            path="home"
-            element={<Home fetchUserDetails={fetchUserDetails} />}
-          />
+          <Route path="home" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route
-            path="/userinfo"
-            element={<UserInfo fetchUserDetails={fetchUserDetails} />}
-          />
+          <Route path="/userinfo" element={<UserInfo />} />
           <Route path="/addprofile" element={<AddProfile />} />
           <Route path="/editprofile/:id" element={<AddProfile />} />
           <Route path="*" element={<Error />} />
