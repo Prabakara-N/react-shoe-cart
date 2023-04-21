@@ -190,7 +190,6 @@ const CheckoutForm = () => {
                 />
               </div>
             </div>
-            {/*  */}
             <div className="mt-4">
               <div className="w-full">
                 <label
@@ -288,7 +287,7 @@ const CheckoutForm = () => {
                     value={year}
                     onChange={handleYear}
                     autoComplete="off"
-                    placeholder="Expiry Date"
+                    placeholder="Expiry Year"
                     className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                   />
                 </div>
