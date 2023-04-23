@@ -3,6 +3,7 @@ import { UserAuth } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { CartContext } from "../contexts/CartContext";
 import { SidebarContext } from "../contexts/SidebarContext";
+import LoadingBtn from "./LoadingBtn";
 
 const CheckoutForm = () => {
   const [lastName, setLastName] = useState("");
@@ -11,6 +12,7 @@ const CheckoutForm = () => {
   const [cardNum, setCardNum] = useState("");
   const [year, setYear] = useState("");
   const [cvv, setCvv] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     userName,
@@ -103,7 +105,11 @@ const CheckoutForm = () => {
         toast.error("Card Expired...Please enter a valid card details");
       } else {
         setIsOpen(false);
-        setModalIsOpen(true);
+        setIsLoading(true);
+        setTimeout(() => {
+          setIsLoading(false);
+          setModalIsOpen(true);
+        }, 2500);
       }
     } else {
       setModalIsOpen(false);
@@ -328,14 +334,17 @@ const CheckoutForm = () => {
                 </span>
               </label>
             </div>
-
             <div className="mt-4">
-              <button
-                type="submit"
-                className="w-full lg:w-auto px-6 py-2 rounded-md font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
-              >
-                Proceed To Pay
-              </button>
+              {isLoading ? (
+                <LoadingBtn />
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full lg:w-auto px-6 py-2 rounded-md font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-200"
+                >
+                  Proceed To Pay
+                </button>
+              )}
             </div>
           </div>
         </form>
