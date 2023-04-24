@@ -6,7 +6,7 @@ const LoadingBtn = () => {
       <button
         disabled
         type="button"
-        className="text-white bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-md text-[1rem] px-6 py-2 text-center mr-2 font-medium dark:bg-blue-600 dark:focus:ring-blue-700 inline-flex items-center"
+        className="text-white w-full lg:w-auto bg-blue-700 focus:ring-4 focus:ring-blue-300 rounded-md text-[1rem] px-6 py-2.5 text-center mr-2 font-medium dark:bg-blue-600 dark:focus:ring-blue-700 inline-flex items-center"
       >
         <svg
           aria-hidden="true"
