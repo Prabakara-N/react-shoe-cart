@@ -38,9 +38,9 @@ const OrderedProduct = () => {
                     <span className="md:hidden block text-center underline text-[0.9rem] font-medium text-gray-600">
                       Prize
                     </span>
-                    <p className="text-base xl:text-lg leading-6">
+                    <p className="text-base md:text-xl font-medium leading-6">
                       $ {item.price}
-                      <span className="text-red-500 font-medium pl-2 text-sm line-through">
+                      <span className="text-red-500 font-medium pl-2 text-[0.7rem] md:text-[0.85rem] line-through">
                         $ {item.originalPrize}
                       </span>
                     </p>
@@ -51,7 +51,7 @@ const OrderedProduct = () => {
                     </span>
                     {item.amount}
                   </p>
-                  <p className="text-base flex flex-col items-center xl:text-lg font-semibold leading-6 text-gray-800">
+                  <p className="text-base flex flex-col items-center xl:text-xl font-semibold leading-6 text-gray-800">
                     <span className="md:hidden underline text-[0.9rem] font-medium text-red-600">
                       Total Prize
                     </span>
