@@ -3,6 +3,7 @@ import { CartContext } from "../contexts/CartContext";
 
 const Orders = () => {
   const { cart, total } = useContext(CartContext);
+
   return (
     <>
       <div className="flex flex-col w-full ml-0 lg:ml-12 lg:w-2/5">

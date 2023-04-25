@@ -9,15 +9,23 @@ let cartData = localStorage.getItem("shoe")
   ? JSON.parse(localStorage.getItem("shoe"))
   : [];
 
+let orderData = localStorage.getItem("orders")
+  ? JSON.parse(localStorage.getItem("orders"))
+  : [];
+
 const CartProvider = ({ children }) => {
   // cart state
   const [cart, setCart] = useState(cartData);
+
+  // order state
+  const [orders, setOrders] = useState(orderData);
 
   // cart amt state
   const [itemAmount, setItemAmount] = useState(0);
 
   // total prize state
   const [total, setTotal] = useState(0);
+  const [orderTotal, setOrderTotal] = useState(0);
 
   // modal
   let [isModalOpen, setModalIsOpen] = useState(false);
@@ -32,6 +40,11 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("shoe", JSON.stringify(cart));
   }, [cart]);
+
+  // localstorage set item
+  useEffect(() => {
+    localStorage.setItem("orders", JSON.stringify(orders));
+  }, [orders]);
 
   // update item amount
   useEffect(() => {
@@ -50,6 +63,13 @@ const CartProvider = ({ children }) => {
     }, 0);
     setTotal(total);
   }, [cart]);
+
+  useEffect(() => {
+    const orderTotal = orders.reduce((accumulator, currentItem) => {
+      return accumulator + currentItem.price * currentItem.amount;
+    }, 0);
+    setOrderTotal(orderTotal);
+  }, [orders]);
 
   // alert notification
   useEffect(() => {
@@ -157,6 +177,9 @@ const CartProvider = ({ children }) => {
         alertMsg,
         isModalOpen,
         setModalIsOpen,
+        orders,
+        setOrders,
+        orderTotal,
       }}
     >
       {children}

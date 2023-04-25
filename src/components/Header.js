@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Tooltip from "react-bootstrap/Tooltip";
 import { OverlayTrigger } from "react-bootstrap";
+import OrderLogo from "../assets/images/tracking.png";
 // link
 import { Link } from "react-router-dom";
 import userLogo from "../assets/images/user.png";
@@ -35,6 +36,16 @@ const Header = () => {
     </Tooltip>
   );
 
+  const renderTooltipOrder = (props) => (
+    <Tooltip
+      className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      id="button-tooltip"
+      {...props}
+    >
+      Orders
+    </Tooltip>
+  );
+
   // eventlisteneres
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -61,6 +72,22 @@ const Header = () => {
           <div className="flex items-center gap-x-5 md:gap-x-8">
             <OverlayTrigger
               placement="left"
+              delay={{ show: 200, hide: 100 }}
+              overlay={renderTooltipOrder}
+            >
+              <div>
+                <Link to={`/orders`}>
+                  <img
+                    src={OrderLogo}
+                    alt="OrderLogo"
+                    className="w-[40px] h-[40px] rounded-full"
+                  />
+                </Link>
+              </div>
+            </OverlayTrigger>
+
+            <OverlayTrigger
+              placement="bottom"
               delay={{ show: 200, hide: 100 }}
               overlay={renderTooltip}
             >

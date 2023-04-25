@@ -24,7 +24,7 @@ const CheckoutForm = () => {
     setEmail,
     setAddress,
   } = UserAuth();
-  const { setModalIsOpen } = useContext(CartContext);
+  const { setModalIsOpen, setOrders, orders, cart } = useContext(CartContext);
   const { setIsOpen } = useContext(SidebarContext);
 
   // number
@@ -106,6 +106,7 @@ const CheckoutForm = () => {
       } else {
         setIsOpen(false);
         setIsLoading(true);
+        setOrders([...orders, ...cart]);
         setTimeout(() => {
           setIsLoading(false);
           setModalIsOpen(true);
