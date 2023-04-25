@@ -23,7 +23,7 @@ const OrderSummary = () => {
             <img
               src="https://assets.materialup.com/uploads/c49f60e7-655f-4ddd-bf29-7e702828d651/preview.png"
               alt="no-orders"
-              className="h-screen lg:h-[90vh]"
+              className="h-[90vh]"
             />
           </div>
         </div>

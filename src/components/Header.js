@@ -28,7 +28,7 @@ const Header = () => {
   // bootstrap tooltip
   const renderTooltip = (props) => (
     <Tooltip
-      className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      className="text-white bg-black/20 mt-3 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
       id="button-tooltip"
       {...props}
     >
