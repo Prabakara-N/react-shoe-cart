@@ -61,9 +61,7 @@ const OrderSummary = () => {
                       <p className="text-base leading-4 text-gray-800">
                         Shipping
                       </p>
-                      <p className="text-base leading-4 text-gray-600">
-                        $ 10.00
-                      </p>
+                      <p className="text-base leading-4 text-gray-600">$ 10</p>
                     </div>
                   </div>
                   <div className="flex justify-between items-center w-full">
