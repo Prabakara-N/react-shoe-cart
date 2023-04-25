@@ -4,6 +4,7 @@ import OrderedProduct from "../components/OrderedProduct";
 import OrderedUser from "../components/OrderedUser";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
+import NoOrder from "../assets/images/no-order.gif";
 
 const OrderSummary = () => {
   const { orders, orderTotal } = useContext(CartContext);
@@ -20,11 +21,7 @@ const OrderSummary = () => {
             You haven't ordered any product yet.
           </h1>
           <div>
-            <img
-              src="https://assets.materialup.com/uploads/c49f60e7-655f-4ddd-bf29-7e702828d651/preview.png"
-              alt="no-orders"
-              className="h-[90vh]"
-            />
+            <img src={NoOrder} alt="noOrder" className="h-[90vh]" />
           </div>
         </div>
       ) : (
