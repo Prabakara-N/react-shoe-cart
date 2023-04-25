@@ -14,7 +14,7 @@ const UserInfo = () => {
     <>
       <Header />
       <div className="bg-slate-800 w-full h-full flex flex-col min-h-screen justify-center items-center text-white">
-        <div className="bg-slate-900/50 rounded-lg p-6 w-[95%] sm:w-[450px] flex flex-col gap-y-8 mt-16">
+        <div className="bg-slate-900/50 rounded-lg p-6 w-[95%] sm:w-[450px] flex flex-col gap-y-8 lg:mt-16 md:mt-24 mt-36 mb-4 md:mb-0">
           {user && user?.uid === userId ? (
             <>
               <div className="-mt-16">

@@ -13,7 +13,7 @@ const OrderedProduct = () => {
           return (
             <div
               key={item.id}
-              className="mt-4 md:mt-6 flex  flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full "
+              className="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full "
             >
               <div className="pb-4 md:pb-8 w-full md:w-40">
                 <img
@@ -34,16 +34,27 @@ const OrderedProduct = () => {
                   </h3>
                 </div>
                 <div className="flex justify-between space-x-8 items-start w-full">
-                  <p className="text-base xl:text-lg leading-6">
-                    $ {item.price}
-                    <span className="text-red-500 pl-2 text-sm line-through">
-                      $ {item.originalPrize}
+                  <div className="mt-1">
+                    <span className="md:hidden block text-center underline text-[0.9rem] font-medium text-gray-600">
+                      Prize
                     </span>
-                  </p>
-                  <p className="text-base xl:text-lg leading-6 text-gray-800">
+                    <p className="text-base xl:text-lg leading-6">
+                      $ {item.price}
+                      <span className="text-red-500 font-medium pl-2 text-sm line-through">
+                        $ {item.originalPrize}
+                      </span>
+                    </p>
+                  </div>
+                  <p className="text-base flex flex-col items-center xl:text-lg leading-6 text-gray-800">
+                    <span className="md:hidden underline text-[0.9rem] font-medium text-gray-600">
+                      Quantity
+                    </span>
                     {item.amount}
                   </p>
-                  <p className="text-base xl:text-lg font-semibold leading-6 text-gray-800">
+                  <p className="text-base flex flex-col items-center xl:text-lg font-semibold leading-6 text-gray-800">
+                    <span className="md:hidden underline text-[0.9rem] font-medium text-red-600">
+                      Total Prize
+                    </span>
                     $ {item.price * item.amount}
                   </p>
                 </div>
