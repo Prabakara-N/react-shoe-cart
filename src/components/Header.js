@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Tooltip from "react-bootstrap/Tooltip";
 import { OverlayTrigger } from "react-bootstrap";
 import OrderLogo from "../assets/images/tracking.png";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 // link
 import { Link } from "react-router-dom";
 import userLogo from "../assets/images/user.png";
@@ -36,9 +37,19 @@ const Header = () => {
     </Tooltip>
   );
 
+  const renderTooltipLogOut = (props) => (
+    <Tooltip
+      className="text-white z-50 bg-black/20 mt-1 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      id="button-tooltip"
+      {...props}
+    >
+      LogOut
+    </Tooltip>
+  );
+
   const renderTooltipOrder = (props) => (
     <Tooltip
-      className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      className="text-white z-50 bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
       id="button-tooltip"
       {...props}
     >
@@ -110,6 +121,15 @@ const Header = () => {
                 {cart.length}
               </div>
             </div>
+            <OverlayTrigger
+              placement="bottom"
+              delay={{ show: 200, hide: 100 }}
+              overlay={renderTooltipLogOut}
+            >
+              <Link to="/">
+                <RiLogoutCircleRLine className="text-white rounded-full hover:bg-black/20 transition-all duration-200 ml-2 md:ml-4 md:text-2xl" />
+              </Link>
+            </OverlayTrigger>
           </div>
         </div>
         <Alert />
