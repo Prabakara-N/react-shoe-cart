@@ -39,7 +39,7 @@ const Header = () => {
 
   const renderTooltipLogOut = (props) => (
     <Tooltip
-      className="text-white z-50 bg-black/20 mt-1 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      className="text-white z-50 bg-black/20 mt-2 md:ml-4 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
       id="button-tooltip"
       {...props}
     >
