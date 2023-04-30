@@ -1,25 +1,18 @@
 import React, { useState } from "react";
-
 import { UserAuth } from "../contexts/AuthContext";
-
 import Loader from "../components/Loader";
-
 import { FcAddImage } from "react-icons/fc";
 import { MdDelete, MdSaveAlt } from "react-icons/md";
 import { toast } from "react-toastify";
-
 import Tooltip from "react-bootstrap/Tooltip";
 import { OverlayTrigger } from "react-bootstrap";
-
 import {
   deleteObject,
   getDownloadURL,
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-
 import { db, storage } from "../utils/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 
