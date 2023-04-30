@@ -102,7 +102,7 @@ const CheckoutForm = () => {
       } else if (year.length < 4) {
         toast.error("Year Number must be 4 digits");
       } else if (year < 2022) {
-        toast.error("Card Expired...Please enter a valid card details");
+        toast.error("Card year expired...Please enter a valid card details");
       } else {
         setIsOpen(false);
         setIsLoading(true);
