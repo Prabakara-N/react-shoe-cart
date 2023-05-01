@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../utils/firebase";
+import { auth, db } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 // create context
 const AuthContext = createContext();
@@ -58,6 +59,36 @@ const AuthContextProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  // getting user profile
+  const fetchUserDetails = async () => {
+    if (user && user?.uid) {
+      const q = query(
+        collection(db, "userInfo"),
+        where("userId", "==", user?.uid)
+      );
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.docs.map((doc) => {
+        setDocId(doc.id);
+        const userData = doc.data();
+        if (userData) {
+          setUserId(userData.userId);
+          setUserName(userData.userName);
+          setImageAsset(userData.image);
+          setEmail(userData.email);
+          setNumber(userData.number);
+          setAddress(userData.address);
+        }
+        return doc.id;
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, user?.uid]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -79,6 +110,7 @@ const AuthContextProvider = ({ children }) => {
         setDocId,
         userId,
         setUserId,
+        fetchUserDetails,
       }}
     >
       {children}
