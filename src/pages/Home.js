@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import shoes from "../data/data";
 
 // import products
@@ -9,9 +9,17 @@ import Product from "../components/Product";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import { Slide, ToastContainer } from "react-toastify";
+import { UserAuth } from "../contexts/AuthContext";
 
 const Home = () => {
   const [myShoes, setMyShoes] = useState(shoes);
+
+  const { user, fetchUserDetails } = UserAuth();
+
+  useEffect(() => {
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, user?.uid]);
 
   // filter
   const filterBrands = (category) => {
