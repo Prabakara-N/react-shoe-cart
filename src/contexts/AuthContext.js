@@ -37,7 +37,7 @@ const AuthContextProvider = ({ children }) => {
 
   // login
   const logIn = (email, password) => {
-    clearUserData();
+    // clearUserData();
     return signInWithEmailAndPassword(auth, email, password);
   };
 
