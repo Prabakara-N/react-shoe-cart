@@ -33,6 +33,7 @@ const AddProfile = () => {
     setImageAsset,
   } = UserAuth();
 
+  // getting docId from URL path
   const { id } = useParams();
 
   const navigate = useNavigate();
