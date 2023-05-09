@@ -3,7 +3,7 @@ import { UserAuth } from "../contexts/AuthContext";
 import Loader from "../components/Loader";
 import { FcAddImage } from "react-icons/fc";
 import { MdDelete, MdSaveAlt } from "react-icons/md";
-import { toast } from "react-toastify";
+import { Slide, ToastContainer, toast } from "react-toastify";
 import Tooltip from "react-bootstrap/Tooltip";
 import { OverlayTrigger } from "react-bootstrap";
 import {
@@ -65,14 +65,29 @@ const AddProfile = () => {
       const imageFile = e.target.files[0];
       const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
+      const toastId = toast.info("Uploading...", { autoClose: false });
 
       uploadTask.on(
         "state_changed",
         (snapshot) => {
+          // toast.info("Uploading...");
           const uploadProgress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(uploadProgress);
-          toast.promise("uploading...Please wait...");
+          if (uploadProgress === 100) {
+            // If upload is complete, hide the toast message after 2 seconds
+            setTimeout(() => {
+              toast.dismiss(toastId);
+            }, 5000);
+          } else {
+            // If upload is still in progress, update the toast message with the current progress
+            toast.update(toastId, {
+              // render: `Uploading...Please Wait...`,
+              render: `${uploadProgress.toFixed(0)}% Uploaded`,
+              type: toast.TYPE.INFO,
+              autoClose: false, // Disable auto-close while upload is in progress
+            });
+          }
         },
         (error) => {
           toast.error(`Error while uploading : Try Again...`);
@@ -85,6 +100,7 @@ const AddProfile = () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageAsset(downloadURL);
             setIsLoading(false);
+            toast.dismiss(toastId);
             toast.success("Image uploaded successfully...!");
           });
         }
@@ -143,6 +159,11 @@ const AddProfile = () => {
 
   return (
     <div className="bg-slate-800 w-full h-full flex flex-col min-h-screen justify-center items-center text-white">
+      <ToastContainer
+        position="top-right"
+        pauseOnHover={false}
+        transition={Slide}
+      />
       <div className="p-6 rounded-lg bg-slate-900/30 w-[95%] sm:w-[450px]">
         <form onSubmit={saveDetails} className="flex flex-col gap-y-8">
           {isLoading ? (

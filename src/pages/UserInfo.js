@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -7,8 +7,22 @@ import Header from "../components/Header";
 import { UserAuth } from "../contexts/AuthContext";
 
 const UserInfo = () => {
-  const { user, userName, email, number, address, imageAsset, docId, userId } =
-    UserAuth();
+  const {
+    user,
+    userName,
+    email,
+    number,
+    address,
+    imageAsset,
+    docId,
+    userId,
+    fetchUserDetails,
+  } = UserAuth();
+
+  useEffect(() => {
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, user?.uid]);
 
   return (
     <>
