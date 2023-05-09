@@ -75,15 +75,20 @@ const AddProfile = () => {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(uploadProgress);
           if (uploadProgress === 100) {
-            // If upload is complete, hide the toast message after 2 seconds
-            setTimeout(() => {
-              toast.dismiss(toastId);
-            }, 5000);
+            // // If upload is complete, hide the toast message after 2 seconds
+            // setTimeout(() => {
+            //   toast.dismiss(toastId);
+            // }, 5000);
+            toast.update(toastId, {
+              render: `${uploadProgress.toFixed(0)}% Uploaded`,
+              type: toast.TYPE.SUCCESS,
+              autoClose: false, // Set the duration to 5000 milliseconds (5 seconds)
+            });
           } else {
             // If upload is still in progress, update the toast message with the current progress
             toast.update(toastId, {
               // render: `Uploading...Please Wait...`,
-              render: `${uploadProgress.toFixed(0)}% Uploaded`,
+              render: `${uploadProgress.toFixed(0)}% Uploading...`,
               type: toast.TYPE.INFO,
               autoClose: false, // Disable auto-close while upload is in progress
             });
@@ -146,7 +151,7 @@ const AddProfile = () => {
             address: address,
             userId: user.uid,
           });
-          toast.success("Profile Updated Successfully");
+          toast.success("Profile Updated Successfully", { autoClose: 3000 });
         } catch (error) {
           console.log(error);
         }
