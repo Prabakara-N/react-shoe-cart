@@ -85,6 +85,7 @@ const AddProfile = () => {
               render: `${uploadProgress.toFixed(0)}% Uploading...`,
               type: toast.TYPE.INFO,
               autoClose: false,
+              closeOnClick: false,
             });
           }
         },
