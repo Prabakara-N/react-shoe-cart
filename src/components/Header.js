@@ -107,7 +107,7 @@ const Header = () => {
                   <img
                     src={`${imageAsset ? imageAsset : userLogo}`}
                     alt="user-logo"
-                    className="w-[40px] h-[40px] rounded-full"
+                    className="w-[40px] h-[40px] rounded-full profile-img"
                   />
                 </Link>
               </div>

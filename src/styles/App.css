@@ -53,6 +53,11 @@ body {
   mix-blend-mode: color-burn;
 }
 
+.profile-img {
+  aspect-ratio: 3/3;
+  object-fit: contain;
+}
+
 .alert-section {
   text-align: center;
   position: relative;

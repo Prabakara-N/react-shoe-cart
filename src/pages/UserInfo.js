@@ -35,7 +35,7 @@ const UserInfo = () => {
                 <img
                   src={`${imageAsset ? imageAsset : profile}`}
                   alt="profile"
-                  className="w-[100px] h-[100px] rounded-full mx-auto"
+                  className="w-[100px] h-[100px] rounded-full mx-auto profile-img"
                 />
               </div>
               <div className="text-center">

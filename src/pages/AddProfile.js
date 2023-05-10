@@ -196,7 +196,7 @@ const AddProfile = () => {
                     <img
                       src={imageAsset}
                       alt="profile-pic"
-                      className="w-[100px] h-[100px] rounded-full"
+                      className="w-[100px] h-[100px] rounded-full profile-img"
                     />
                     <OverlayTrigger
                       placement="right"
