@@ -33,9 +33,9 @@ const UserInfo = () => {
             <>
               <div className="-mt-16">
                 <img
-                  src={`${imageAsset ? imageAsset : profile}`}
+                  src={`${imageAsset || profile}`}
                   alt="profile"
-                  className="w-[100px] h-[100px] rounded-full mx-auto profile-img"
+                  className="w-[100px] h-[100px] rounded-full mx-auto"
                 />
               </div>
               <div className="text-center">
@@ -85,7 +85,7 @@ const UserInfo = () => {
             <>
               <div className="-mt-16">
                 <img
-                  src={`${imageAsset ? imageAsset : profile}`}
+                  src={`${imageAsset || profile}`}
                   alt="profile"
                   className="w-[100px] h-[100px] rounded-full mx-auto"
                 />

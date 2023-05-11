@@ -6,16 +6,12 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 // link
 import { Link } from "react-router-dom";
 import userLogo from "../assets/images/user.png";
-
 // sidebar context
 import { SidebarContext } from "../contexts/SidebarContext";
-
 // cart context
 import { CartContext } from "../contexts/CartContext";
-
 // import icons
 import { BsBag } from "react-icons/bs";
-
 // alert
 import Alert from "./Alert";
 import { UserAuth } from "../contexts/AuthContext";
@@ -25,6 +21,7 @@ const Header = () => {
   const [isActive, setIsActive] = useState(false);
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { imageAsset } = UserAuth();
+  const { cart } = useContext(CartContext);
 
   // bootstrap tooltip
   const renderTooltip = (props) => (
@@ -64,7 +61,6 @@ const Header = () => {
     });
   });
 
-  const { cart } = useContext(CartContext);
   return (
     <>
       <header
@@ -105,9 +101,9 @@ const Header = () => {
               <div>
                 <Link to={`/userinfo`}>
                   <img
-                    src={`${imageAsset ? imageAsset : userLogo}`}
+                    src={`${imageAsset || userLogo}`}
                     alt="user-logo"
-                    className="w-[40px] h-[40px] rounded-full profile-img"
+                    className="w-[40px] h-[40px] rounded-full"
                   />
                 </Link>
               </div>

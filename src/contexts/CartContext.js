@@ -78,7 +78,7 @@ const CartProvider = ({ children }) => {
         type: "",
         msg: "",
       });
-    }, 2000);
+    }, 2500);
 
     return () => clearTimeout(timeOut);
   });
@@ -102,12 +102,11 @@ const CartProvider = ({ children }) => {
       setCart(newCart);
     } else {
       setCart([...cart, newItem]);
+      setAlertMsg({
+        type: "cart",
+        msg: "Item Added to cart successfully !",
+      });
     }
-
-    setAlertMsg({
-      type: "cart",
-      msg: "Item Added to cart successfully !",
-    });
   };
 
   // remove from the cart

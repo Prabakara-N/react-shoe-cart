@@ -79,7 +79,7 @@ const AuthContextProvider = ({ children }) => {
           setNumber(userData.number);
           setAddress(userData.address);
         }
-        return doc.id;
+        return doc;
       });
     }
   };

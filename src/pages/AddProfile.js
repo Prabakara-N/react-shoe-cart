@@ -179,7 +179,7 @@ const AddProfile = () => {
                       overlay={tooltipRender}
                     >
                       <div className="w-[100px] h-[100px] mx-auto bg-black/60 rounded-full flex items-center justify-center -mt-20 cursor-pointer">
-                        <FcAddImage className="w-[45px] h-[45px]  " />
+                        <FcAddImage className="w-[45px] h-[45px]" />
                       </div>
                     </OverlayTrigger>
                     <input
@@ -197,7 +197,7 @@ const AddProfile = () => {
                     <img
                       src={imageAsset}
                       alt="profile-pic"
-                      className="w-[100px] h-[100px] rounded-full profile-img"
+                      className="w-[100px] h-[100px] rounded-full"
                     />
                     <OverlayTrigger
                       placement="right"
@@ -252,7 +252,10 @@ const AddProfile = () => {
           <div>
             <button
               type="submit"
-              className="bg-blue-700 py-2 px-3 rounded-lg font-medium inline-flex gap-x-2 items-center"
+              // className="bg-blue-700 py-2 px-3 rounded-lg font-medium inline-flex gap-x-2 items-center"
+              className={`${
+                isLoading ? "no-pointer" : "pointer"
+              } bg-blue-700 py-2 px-3 rounded-lg font-medium inline-flex gap-x-2 items-center`}
             >
               Save <MdSaveAlt />
             </button>
