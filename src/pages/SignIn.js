@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
 import SocialMedia from "../components/SocialMedia";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isEyeOpen, setIsEyeOpen] = useState(false);
   const { logIn } = UserAuth();
 
   const navigate = useNavigate();
@@ -55,13 +57,22 @@ const SignIn = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <input
-                  className="p-3 my-2 bg-gray-700 rounded"
-                  type="password"
-                  placeholder="Password"
-                  autoComplete="current-password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="password-input relative">
+                  <input
+                    className="p-3 my-2 w-full bg-gray-700 rounded"
+                    type={isEyeOpen ? "text" : "password"}
+                    placeholder="Password"
+                    autoComplete="current-password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div
+                    className="cursor-pointer absolute bottom-5 right-3"
+                    onClick={() => setIsEyeOpen(!isEyeOpen)}
+                  >
+                    {isEyeOpen ? <FaEye /> : <FaEyeSlash />}
+                  </div>
+                </div>
+
                 <button
                   type="submit"
                   className="bg-gray-600 py-3 my-6 rounded font-semibold hover:bg-slate-600 transition-all duration-300"

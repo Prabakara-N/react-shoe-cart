@@ -252,7 +252,6 @@ const AddProfile = () => {
           <div>
             <button
               type="submit"
-              // className="bg-blue-700 py-2 px-3 rounded-lg font-medium inline-flex gap-x-2 items-center"
               className={`${
                 isLoading ? "no-pointer" : "pointer"
               } bg-blue-700 py-2 px-3 rounded-lg font-medium inline-flex gap-x-2 items-center`}
