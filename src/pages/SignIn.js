@@ -31,8 +31,8 @@ const SignIn = () => {
   return (
     <>
       <div className="w-full h-screen mx-auto bg-slate-600 flex justify-center items-center min-h-[100vh] in">
-        <div className="fixed w-full px-4 py-20 z-50 ">
-          <div className="max-w-[450px] h-[600px] mx-auto bg-black/80 text-white rounded-md">
+        <div className="fixed w-full px-4 py-24 z-50 ">
+          <div className="max-w-[450px] h-[520px] mx-auto bg-black/80 text-white rounded-md">
             <div className="max-w-[320px] mx-auto py-16 px-3 md:px-0">
               <div className="logo-login text-center ">
                 <img
@@ -91,7 +91,9 @@ const SignIn = () => {
                   <Link to="/signup"> Sign Up</Link>{" "}
                 </p>
               </form>
-              <SocialMedia />
+              <div className="-mt-4 pb-3">
+                <SocialMedia />
+              </div>
             </div>
           </div>
         </div>
